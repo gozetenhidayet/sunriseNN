@@ -13,7 +13,6 @@
     "default_popup": "popup.html",
     "default_title": "toolnova.tools"
   },
-  "context_menus": true,
   "permissions": [
     "contextMenus",
     "activeTab"
