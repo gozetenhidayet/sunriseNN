@@ -1,82 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Admin — toolnova.tools</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{--bg:#f7f8fc;--surface:#fff;--surface2:#f0f2f8;--border:#e2e5f0;--accent:#4f63d2;--accent-light:#eef0fd;--accent2:#0ba87e;--accent2-light:#e6f8f3;--text:#1a1d2e;--muted:#6b7394;--radius:14px;}
-body{background:var(--bg);color:var(--text);font-family:Inter,sans-serif;font-size:15px;line-height:1.6;min-height:100vh;}
+:root{--bg:#0f1117;--surface:#1a1d2e;--surface2:#222538;--border:#2d3154;--accent:#4f63d2;--accent-light:rgba(79,99,210,0.15);--accent2:#0ba87e;--accent2-light:rgba(11,168,126,0.15);--text:#e8eaf6;--muted:#8b90b8;--red:#e74c3c;--yellow:#f39c12;--green:#0ba87e;--radius:14px;}
+body{background:var(--bg);color:var(--text);font-family:Inter,sans-serif;font-size:14px;line-height:1.6;min-height:100vh;}
 
 /* LOGIN */
-#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#4f63d2 0%,#3d4fb8 100%);}
-.login-card{background:#fff;border-radius:20px;padding:48px 40px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,0.2);text-align:center;}
-.login-logo{font-family:"Plus Jakarta Sans",sans-serif;font-size:24px;font-weight:800;color:var(--accent);margin-bottom:4px;}
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#0f1117 0%,#1a1d2e 100%);}
+.login-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:48px 40px;width:100%;max-width:420px;text-align:center;}
+.login-logo{font-family:"Plus Jakarta Sans",sans-serif;font-size:26px;font-weight:800;color:var(--accent);margin-bottom:4px;}
 .login-logo span{color:var(--accent2);}
 .login-sub{color:var(--muted);font-size:13px;margin-bottom:32px;}
-.login-card input{width:100%;background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;padding:13px 16px;font-size:15px;font-family:inherit;outline:none;margin-bottom:16px;color:var(--text);text-align:center;letter-spacing:2px;}
+.login-card input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:13px 16px;font-size:15px;font-family:inherit;outline:none;margin-bottom:16px;color:var(--text);text-align:center;letter-spacing:3px;}
 .login-card input:focus{border-color:var(--accent);}
 .login-btn{width:100%;background:var(--accent);border:none;border-radius:10px;padding:14px;color:#fff;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;}
-.login-btn:hover{background:#3d4fb8;}
-.login-error{color:#e74c3c;font-size:13px;margin-top:12px;display:none;}
+.login-error{color:var(--red);font-size:13px;margin-top:12px;display:none;}
 
 /* DASHBOARD */
 #dashboard{display:none;}
-nav{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
-.logo{font-family:"Plus Jakarta Sans",sans-serif;font-size:20px;font-weight:800;color:var(--accent);}
-.logo span{color:var(--accent2);}
-.nav-right{display:flex;align-items:center;gap:16px;}
-.badge{background:var(--accent-light);color:var(--accent);font-size:12px;font-weight:600;padding:4px 12px;border-radius:99px;}
-.logout-btn{background:none;border:1.5px solid var(--border);border-radius:8px;padding:6px 14px;font-size:13px;cursor:pointer;color:var(--muted);font-family:inherit;}
 
-.wrap{max-width:1100px;margin:0 auto;padding:32px 24px 64px;}
-.page-title{font-family:"Plus Jakarta Sans",sans-serif;font-size:24px;font-weight:800;margin-bottom:6px;}
-.page-sub{color:var(--muted);font-size:14px;margin-bottom:32px;}
+/* TOP NAV */
+.topnav{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+.topnav-logo{font-family:"Plus Jakarta Sans",sans-serif;font-size:18px;font-weight:800;color:var(--accent);}
+.topnav-logo span{color:var(--accent2);}
+.topnav-right{display:flex;align-items:center;gap:12px;}
+.badge-live{background:rgba(11,168,126,0.2);color:var(--accent2);font-size:11px;font-weight:600;padding:4px 12px;border-radius:99px;display:flex;align-items:center;gap:5px;}
+.badge-live::before{content:'';width:6px;height:6px;background:var(--accent2);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.logout-btn{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:6px 14px;font-size:12px;cursor:pointer;color:var(--muted);font-family:inherit;}
+.clock{font-size:12px;color:var(--muted);}
 
-/* STATS */
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:32px;}
-.stat-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:24px;}
-.stat-icon{font-size:28px;margin-bottom:12px;}
-.stat-label{color:var(--muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
-.stat-value{font-family:"Plus Jakarta Sans",sans-serif;font-size:28px;font-weight:800;color:var(--accent);}
-.stat-value.green{color:var(--accent2);}
-.stat-change{font-size:12px;color:var(--muted);margin-top:4px;}
+/* SIDEBAR */
+.layout{display:flex;min-height:calc(100vh - 53px);}
+.sidebar{width:200px;background:var(--surface);border-right:1px solid var(--border);padding:20px 0;flex-shrink:0;}
+.sidebar-item{display:flex;align-items:center;gap:10px;padding:10px 20px;cursor:pointer;color:var(--muted);font-size:13px;font-weight:500;transition:all .15s;border-left:3px solid transparent;}
+.sidebar-item:hover{color:var(--text);background:var(--surface2);}
+.sidebar-item.active{color:var(--accent);background:var(--accent-light);border-left-color:var(--accent);}
+.sidebar-icon{font-size:16px;width:20px;text-align:center;}
+.sidebar-sep{height:1px;background:var(--border);margin:12px 16px;}
 
-/* SECTIONS */
-.section-title{font-family:"Plus Jakarta Sans",sans-serif;font-size:18px;font-weight:700;margin:32px 0 16px;display:flex;align-items:center;gap:10px;}
-.section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+/* MAIN */
+.main{flex:1;padding:28px 32px;overflow:auto;}
+.page{display:none;}
+.page.active{display:block;}
 
-/* INCOME TABLE */
-.income-table{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;}
-.income-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:16px 20px;border-bottom:1px solid var(--border);align-items:center;}
-.income-row:last-child{border-bottom:none;}
-.income-row.header{background:var(--surface2);font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;}
-.income-source{font-weight:600;font-size:14px;}
-.income-status{font-size:12px;font-weight:600;padding:3px 10px;border-radius:99px;display:inline-block;}
-.status-pending{background:#fff3e6;color:#e07a20;}
-.status-active{background:var(--accent2-light);color:var(--accent2);}
-.status-waiting{background:var(--accent-light);color:var(--accent);}
-.income-amount{font-family:"Plus Jakarta Sans",sans-serif;font-weight:700;font-size:15px;}
+/* PAGE HEADER */
+.page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;}
+.page-title{font-family:"Plus Jakarta Sans",sans-serif;font-size:22px;font-weight:800;}
+.period-tabs{display:flex;gap:4px;background:var(--surface2);border-radius:8px;padding:4px;}
+.period-tab{padding:5px 12px;border-radius:6px;border:none;background:none;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;}
+.period-tab.active{background:var(--accent);color:#fff;}
 
-/* LINKS */
-.links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
-.link-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px;text-decoration:none;display:block;transition:all .2s;}
+/* KPI CARDS */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:24px;}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;}
+.kpi-label{color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;}
+.kpi-value{font-family:"Plus Jakarta Sans",sans-serif;font-size:26px;font-weight:800;margin-bottom:4px;}
+.kpi-value.green{color:var(--green);}
+.kpi-value.accent{color:var(--accent);}
+.kpi-value.yellow{color:var(--yellow);}
+.kpi-change{font-size:12px;color:var(--muted);}
+.kpi-change.up{color:var(--green);}
+.kpi-change.down{color:var(--red);}
+
+/* CHARTS */
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;}
+.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;}
+.chart-card.full{grid-column:1/-1;}
+.chart-title{font-weight:600;font-size:14px;margin-bottom:16px;color:var(--text);}
+
+/* TABLES */
+.table-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:20px;}
+.table-header{padding:16px 20px;font-weight:600;font-size:14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+table{width:100%;border-collapse:collapse;}
+th{padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;background:var(--surface2);border-bottom:1px solid var(--border);}
+td{padding:12px 16px;border-bottom:1px solid var(--border);font-size:13px;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:var(--surface2);}
+.status-pill{padding:3px 10px;border-radius:99px;font-size:11px;font-weight:600;display:inline-block;}
+.pill-pending{background:rgba(243,156,18,.15);color:var(--yellow);}
+.pill-active{background:var(--accent2-light);color:var(--accent2);}
+.pill-waiting{background:var(--accent-light);color:var(--accent);}
+.pill-declined{background:rgba(231,76,60,.15);color:var(--red);}
+
+/* INCOME ENTRY */
+.entry-form{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:20px;}
+.entry-form h3{font-size:14px;font-weight:600;margin-bottom:16px;}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;}
+.form-grid input,.form-grid select{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:13px;font-family:inherit;outline:none;width:100%;}
+.form-grid input:focus,.form-grid select:focus{border-color:var(--accent);}
+.save-btn{background:var(--accent);border:none;border-radius:8px;padding:9px 20px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:10px;}
+
+/* QUICK LINKS */
+.links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:24px;}
+.link-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-decoration:none;display:block;transition:all .2s;}
 .link-card:hover{border-color:var(--accent);transform:translateY(-2px);}
 .link-icon{font-size:22px;margin-bottom:8px;}
-.link-name{font-weight:600;font-size:14px;color:var(--text);}
-.link-desc{font-size:12px;color:var(--muted);margin-top:2px;}
+.link-name{font-weight:600;font-size:13px;color:var(--text);}
+.link-desc{font-size:11px;color:var(--muted);margin-top:2px;}
 
 /* CHECKLIST */
-.checklist{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:24px;}
-.check-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.check-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);}
 .check-item:last-child{border-bottom:none;}
-.check-icon{font-size:18px;width:24px;text-align:center;}
-.check-text{flex:1;font-size:14px;}
-.check-status{font-size:12px;font-weight:600;padding:3px 10px;border-radius:99px;}
+.check-text{flex:1;font-size:13px;}
 
-@media(max-width:640px){nav{padding:14px 16px;}.wrap{padding:24px 16px 48px;}.income-row{grid-template-columns:1fr 1fr;gap:8px;}}
+/* COUNTRY FLAGS */
+.country-row{display:flex;align-items:center;gap:10px;}
+.flag{font-size:18px;width:24px;}
+.bar-wrap{flex:1;background:var(--surface2);border-radius:99px;height:6px;overflow:hidden;}
+.bar-fill{height:100%;background:var(--accent);border-radius:99px;}
+
+/* RESPONSIVE */
+@media(max-width:768px){.sidebar{display:none;}.chart-grid{grid-template-columns:1fr;}.kpi-grid{grid-template-columns:1fr 1fr;}.main{padding:16px;}.form-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.kpi-grid{grid-template-columns:1fr;}.form-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -85,193 +126,502 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 4
 <div id="login-screen">
   <div class="login-card">
     <div class="login-logo">toolnova<span>.tools</span></div>
-    <div class="login-sub">🔒 Admin Panel — Private Access Only</div>
-    <input type="password" id="pw-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')tryLogin()">
-    <button class="login-btn" onclick="tryLogin()">Login</button>
-    <div class="login-error" id="login-error">❌ Wrong password. Try again.</div>
+    <div class="login-sub">🔒 Private Admin Dashboard</div>
+    <input type="password" id="pw-input" placeholder="••••••••••••" onkeydown="if(event.key==='Enter')tryLogin()">
+    <button class="login-btn" onclick="tryLogin()">Sign In</button>
+    <div class="login-error" id="login-error">❌ Wrong password</div>
   </div>
 </div>
 
 <!-- DASHBOARD -->
 <div id="dashboard">
-  <nav>
-    <div class="logo">toolnova<span>.tools</span> <span style="font-size:13px;font-weight:400;color:var(--muted);margin-left:8px;">Admin</span></div>
-    <div class="nav-right">
-      <span class="badge">🔒 Private</span>
+
+  <!-- TOP NAV -->
+  <div class="topnav">
+    <div class="topnav-logo">toolnova<span>.tools</span> <span style="font-size:12px;font-weight:400;color:var(--muted);margin-left:6px;">Admin</span></div>
+    <div class="topnav-right">
+      <div class="badge-live">Live</div>
+      <div class="clock" id="clock"></div>
       <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
-  </nav>
-
-  <div class="wrap">
-    <div class="page-title">💰 Revenue Dashboard</div>
-    <div class="page-sub" id="last-updated">Last updated: —</div>
-
-    <!-- STATS -->
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-icon">📺</div>
-        <div class="stat-label">AdSense Today</div>
-        <div class="stat-value">$0.00</div>
-        <div class="stat-change">⏳ Pending approval (2-4 weeks)</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">🤝</div>
-        <div class="stat-label">Affiliate This Month</div>
-        <div class="stat-value green">$0.00</div>
-        <div class="stat-change">⏳ Namecheap approval pending</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">👥</div>
-        <div class="stat-label">Site Visitors Today</div>
-        <div class="stat-value" id="visitors-today">—</div>
-        <div class="stat-change">📊 Check Google Analytics</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">🌍</div>
-        <div class="stat-label">Total Pages</div>
-        <div class="stat-value">14</div>
-        <div class="stat-change">✅ All indexed in Google</div>
-      </div>
-    </div>
-
-    <!-- INCOME SOURCES -->
-    <div class="section-title">💵 Income Sources</div>
-    <div class="income-table">
-      <div class="income-row header">
-        <div>Source</div>
-        <div>Status</div>
-        <div>This Month</div>
-        <div>Potential</div>
-      </div>
-      <div class="income-row">
-        <div>
-          <div class="income-source">📺 Google AdSense</div>
-          <div style="font-size:12px;color:var(--muted);">Ads on all pages</div>
-        </div>
-        <div><span class="income-status status-pending">Pending</span></div>
-        <div class="income-amount">$0.00</div>
-        <div style="font-size:13px;color:var(--muted);">$50-500/mo</div>
-      </div>
-      <div class="income-row">
-        <div>
-          <div class="income-source">🌐 Namecheap Affiliate</div>
-          <div style="font-size:12px;color:var(--muted);">Domain registrar</div>
-        </div>
-        <div><span class="income-status status-waiting">Review</span></div>
-        <div class="income-amount">$0.00</div>
-        <div style="font-size:13px;color:var(--muted);">$5-20/sale</div>
-      </div>
-      <div class="income-row">
-        <div>
-          <div class="income-source">🔒 NordVPN Affiliate</div>
-          <div style="font-size:12px;color:var(--muted);">VPN service</div>
-        </div>
-        <div><span class="income-status status-waiting">Not joined</span></div>
-        <div class="income-amount">$0.00</div>
-        <div style="font-size:13px;color:var(--muted);">$30-100/sale</div>
-      </div>
-      <div class="income-row">
-        <div>
-          <div class="income-source">🎨 Canva Affiliate</div>
-          <div style="font-size:12px;color:var(--muted);">Design tool</div>
-        </div>
-        <div><span class="income-status status-waiting">Not joined</span></div>
-        <div class="income-amount">$0.00</div>
-        <div style="font-size:13px;color:var(--muted);">80% first month</div>
-      </div>
-      <div class="income-row">
-        <div>
-          <div class="income-source">✍️ Grammarly Affiliate</div>
-          <div style="font-size:12px;color:var(--muted);">Writing assistant</div>
-        </div>
-        <div><span class="income-status status-waiting">Not joined</span></div>
-        <div class="income-amount">$0.00</div>
-        <div style="font-size:13px;color:var(--muted);">$20/pro signup</div>
-      </div>
-    </div>
-
-    <!-- QUICK LINKS -->
-    <div class="section-title">🔗 Quick Links</div>
-    <div class="links-grid">
-      <a class="link-card" href="https://adsense.google.com" target="_blank">
-        <div class="link-icon">📺</div>
-        <div class="link-name">Google AdSense</div>
-        <div class="link-desc">Check ad revenue</div>
-      </a>
-      <a class="link-card" href="https://analytics.google.com" target="_blank">
-        <div class="link-icon">📊</div>
-        <div class="link-name">Google Analytics</div>
-        <div class="link-desc">Visitor stats</div>
-      </a>
-      <a class="link-card" href="https://app.impact.com" target="_blank">
-        <div class="link-icon">🤝</div>
-        <div class="link-name">Impact (Namecheap)</div>
-        <div class="link-desc">Affiliate earnings</div>
-      </a>
-      <a class="link-card" href="https://search.google.com/search-console" target="_blank">
-        <div class="link-icon">🔍</div>
-        <div class="link-name">Search Console</div>
-        <div class="link-desc">SEO performance</div>
-      </a>
-      <a class="link-card" href="https://github.com/gozetenhidayet/toolnova.tools" target="_blank">
-        <div class="link-icon">💻</div>
-        <div class="link-name">GitHub Repo</div>
-        <div class="link-desc">Update site files</div>
-      </a>
-      <a class="link-card" href="https://toolnova.tools" target="_blank">
-        <div class="link-icon">🌐</div>
-        <div class="link-name">toolnova.tools</div>
-        <div class="link-desc">View live site</div>
-      </a>
-    </div>
-
-    <!-- CHECKLIST -->
-    <div class="section-title">✅ Setup Checklist</div>
-    <div class="checklist">
-      <div class="check-item"><div class="check-icon">✅</div><div class="check-text">Site yayında — toolnova.tools</div><span class="check-status" style="background:var(--accent2-light);color:var(--accent2);">Done</span></div>
-      <div class="check-item"><div class="check-icon">✅</div><div class="check-text">Google Analytics bağlandı</div><span class="check-status" style="background:var(--accent2-light);color:var(--accent2);">Done</span></div>
-      <div class="check-item"><div class="check-icon">✅</div><div class="check-text">Google AdSense kodu eklendi</div><span class="check-status" style="background:var(--accent2-light);color:var(--accent2);">Done</span></div>
-      <div class="check-item"><div class="check-icon">✅</div><div class="check-text">ads.txt yüklendi</div><span class="check-status" style="background:var(--accent2-light);color:var(--accent2);">Done</span></div>
-      <div class="check-item"><div class="check-icon">✅</div><div class="check-text">13 tool sayfası (SEO)</div><span class="check-status" style="background:var(--accent2-light);color:var(--accent2);">Done</span></div>
-      <div class="check-item"><div class="check-icon">✅</div><div class="check-text">Sitemap eklendi</div><span class="check-status" style="background:var(--accent2-light);color:var(--accent2);">Done</span></div>
-      <div class="check-item"><div class="check-icon">✅</div><div class="check-text">Chrome Extension gönderildi</div><span class="check-status" style="background:var(--accent2-light);color:var(--accent2);">Done</span></div>
-      <div class="check-item"><div class="check-icon">⏳</div><div class="check-text">AdSense onayı</div><span class="check-status status-pending">2-4 hafta</span></div>
-      <div class="check-item"><div class="check-icon">⏳</div><div class="check-text">Chrome Web Store onayı</div><span class="check-status status-pending">1-3 gün</span></div>
-      <div class="check-item"><div class="check-icon">⏳</div><div class="check-text">Affiliate linkleri güncelle</div><span class="check-status status-pending">Bekliyor</span></div>
-      <div class="check-item"><div class="check-icon">⏳</div><div class="check-text">HTTPS aktif et</div><span class="check-status status-pending">DNS bekliyor</span></div>
-    </div>
   </div>
-</div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-item active" onclick="showPage('overview')"><span class="sidebar-icon">📊</span> Overview</div>
+      <div class="sidebar-item" onclick="showPage('revenue')"><span class="sidebar-icon">💰</span> Revenue</div>
+      <div class="sidebar-item" onclick="showPage('traffic')"><span class="sidebar-icon">👥</span> Traffic</div>
+      <div class="sidebar-item" onclick="showPage('countries')"><span class="sidebar-icon">🌍</span> Countries</div>
+      <div class="sidebar-item" onclick="showPage('tools')"><span class="sidebar-icon">🔧</span> Top Tools</div>
+      <div class="sidebar-sep"></div>
+      <div class="sidebar-item" onclick="showPage('income')"><span class="sidebar-icon">📝</span> Log Income</div>
+      <div class="sidebar-item" onclick="showPage('checklist')"><span class="sidebar-icon">✅</span> Checklist</div>
+      <div class="sidebar-item" onclick="showPage('links')"><span class="sidebar-icon">🔗</span> Quick Links</div>
+      <div class="sidebar-sep"></div>
+      <div class="sidebar-item" onclick="window.open('https://toolnova.tools','_blank')"><span class="sidebar-icon">🌐</span> View Site</div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main">
+
+      <!-- OVERVIEW PAGE -->
+      <div class="page active" id="page-overview">
+        <div class="page-header">
+          <div class="page-title">📊 Overview</div>
+          <div class="period-tabs">
+            <button class="period-tab active" onclick="setPeriod('today',this)">Today</button>
+            <button class="period-tab" onclick="setPeriod('week',this)">Week</button>
+            <button class="period-tab" onclick="setPeriod('month',this)">Month</button>
+            <button class="period-tab" onclick="setPeriod('year',this)">Year</button>
+            <button class="period-tab" onclick="setPeriod('all',this)">All Time</button>
+          </div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi"><div class="kpi-label">💰 Total Revenue</div><div class="kpi-value green" id="kpi-revenue">$0.00</div><div class="kpi-change" id="kpi-revenue-sub">AdSense + Affiliate</div></div>
+          <div class="kpi"><div class="kpi-label">📺 AdSense</div><div class="kpi-value accent" id="kpi-adsense">$0.00</div><div class="kpi-change" id="kpi-adsense-sub">⏳ Pending approval</div></div>
+          <div class="kpi"><div class="kpi-label">🤝 Affiliate</div><div class="kpi-value yellow" id="kpi-affiliate">$0.00</div><div class="kpi-change" id="kpi-affiliate-sub">NordVPN, Namecheap...</div></div>
+          <div class="kpi"><div class="kpi-label">👥 Visitors</div><div class="kpi-value" id="kpi-visitors">—</div><div class="kpi-change">📊 Check Analytics</div></div>
+          <div class="kpi"><div class="kpi-label">📄 Total Pages</div><div class="kpi-value">32</div><div class="kpi-change up">↑ PDF tools added</div></div>
+          <div class="kpi"><div class="kpi-label">🔍 Indexed</div><div class="kpi-value accent">0</div><div class="kpi-change">⏳ Google processing</div></div>
+        </div>
+
+        <div class="chart-grid">
+          <div class="chart-card full">
+            <div class="chart-title">💰 Revenue Over Time (manual entries)</div>
+            <canvas id="revenue-chart" height="80"></canvas>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">💵 Revenue by Source</div>
+            <canvas id="source-chart" height="200"></canvas>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">📈 Monthly Projection</div>
+            <canvas id="projection-chart" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- REVENUE PAGE -->
+      <div class="page" id="page-revenue">
+        <div class="page-header"><div class="page-title">💰 Revenue Log</div></div>
+
+        <div class="entry-form">
+          <h3>➕ Add Income Entry</h3>
+          <div class="form-grid">
+            <select id="e-source">
+              <option value="adsense">Google AdSense</option>
+              <option value="nordvpn">NordVPN Affiliate</option>
+              <option value="namecheap">Namecheap Affiliate</option>
+              <option value="canva">Canva Affiliate</option>
+              <option value="grammarly">Grammarly Affiliate</option>
+              <option value="godaddy">GoDaddy Affiliate</option>
+              <option value="other">Other</option>
+            </select>
+            <input type="number" id="e-amount" placeholder="Amount ($)" step="0.01" min="0">
+            <input type="date" id="e-date">
+            <input type="text" id="e-note" placeholder="Note (optional)">
+          </div>
+          <button class="save-btn" onclick="addEntry()">Save Entry</button>
+        </div>
+
+        <div class="table-card">
+          <div class="table-header">📋 Income History <span id="total-earned" style="color:var(--green);font-size:13px;">Total: $0.00</span></div>
+          <table>
+            <thead><tr><th>Date</th><th>Source</th><th>Amount</th><th>Note</th><th>Action</th></tr></thead>
+            <tbody id="income-table"></tbody>
+          </table>
+        </div>
+
+        <div class="table-card">
+          <div class="table-header">📊 Income Sources Status</div>
+          <table>
+            <thead><tr><th>Source</th><th>Status</th><th>This Month</th><th>All Time</th><th>Potential/mo</th></tr></thead>
+            <tbody>
+              <tr><td>📺 Google AdSense</td><td><span class="status-pill pill-pending">Pending 2-4 weeks</span></td><td>$0.00</td><td>$0.00</td><td>$50-500</td></tr>
+              <tr><td>🔒 NordVPN</td><td><span class="status-pill pill-waiting">Not joined</span></td><td>$0.00</td><td>$0.00</td><td>$30-100/sale</td></tr>
+              <tr><td>🌐 Namecheap</td><td><span class="status-pill pill-declined">Declined</span></td><td>$0.00</td><td>$0.00</td><td>$5-20/sale</td></tr>
+              <tr><td>🎨 Canva</td><td><span class="status-pill pill-waiting">Not joined</span></td><td>$0.00</td><td>$0.00</td><td>80% first mo</td></tr>
+              <tr><td>✍️ Grammarly</td><td><span class="status-pill pill-waiting">Not joined</span></td><td>$0.00</td><td>$0.00</td><td>$20/signup</td></tr>
+              <tr><td>🌐 GoDaddy</td><td><span class="status-pill pill-waiting">Applied</span></td><td>$0.00</td><td>$0.00</td><td>Varies</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TRAFFIC PAGE -->
+      <div class="page" id="page-traffic">
+        <div class="page-header"><div class="page-title">👥 Traffic</div></div>
+        <div class="kpi-grid">
+          <div class="kpi"><div class="kpi-label">Today</div><div class="kpi-value" id="t-today">—</div><div class="kpi-change">Unique visitors</div></div>
+          <div class="kpi"><div class="kpi-label">This Week</div><div class="kpi-value" id="t-week">—</div><div class="kpi-change">Unique visitors</div></div>
+          <div class="kpi"><div class="kpi-label">This Month</div><div class="kpi-value" id="t-month">—</div><div class="kpi-change">Unique visitors</div></div>
+          <div class="kpi"><div class="kpi-label">All Time</div><div class="kpi-value" id="t-all">—</div><div class="kpi-change">Unique visitors</div></div>
+        </div>
+        <div class="entry-form">
+          <h3>📝 Update Traffic Numbers</h3>
+          <div class="form-grid">
+            <input type="number" id="tr-today" placeholder="Today's visitors">
+            <input type="number" id="tr-week" placeholder="This week">
+            <input type="number" id="tr-month" placeholder="This month">
+            <input type="number" id="tr-all" placeholder="All time">
+          </div>
+          <button class="save-btn" onclick="saveTraffic()">Save Traffic</button>
+        </div>
+        <div class="chart-card" style="margin-top:16px;">
+          <div class="chart-title">📈 Traffic Trend</div>
+          <canvas id="traffic-chart" height="100"></canvas>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-top:16px;">
+          <div style="font-weight:600;font-size:14px;margin-bottom:12px;">🔗 Get real numbers from:</div>
+          <a href="https://analytics.google.com" target="_blank" class="link-card" style="display:inline-block;margin-right:10px;margin-bottom:8px;">📊 Google Analytics</a>
+          <a href="https://search.google.com/search-console" target="_blank" class="link-card" style="display:inline-block;">🔍 Search Console</a>
+        </div>
+      </div>
+
+      <!-- COUNTRIES PAGE -->
+      <div class="page" id="page-countries">
+        <div class="page-header"><div class="page-title">🌍 Countries</div></div>
+        <div class="table-card">
+          <div class="table-header">Top Countries by Visitors</div>
+          <div style="padding:20px;" id="countries-list">
+            <div style="color:var(--muted);font-size:13px;text-align:center;padding:20px;">No data yet. Update from Google Analytics.</div>
+          </div>
+        </div>
+        <div class="entry-form">
+          <h3>📝 Add Country Data</h3>
+          <div class="form-grid">
+            <input type="text" id="c-flag" placeholder="Flag emoji 🇺🇸">
+            <input type="text" id="c-country" placeholder="Country name">
+            <input type="number" id="c-visitors" placeholder="Visitors">
+            <input type="number" id="c-pct" placeholder="% of total">
+          </div>
+          <button class="save-btn" onclick="addCountry()">Add Country</button>
+        </div>
+      </div>
+
+      <!-- TOP TOOLS PAGE -->
+      <div class="page" id="page-tools">
+        <div class="page-header"><div class="page-title">🔧 Top Tools</div></div>
+        <div class="table-card">
+          <div class="table-header">Most Used Tools</div>
+          <table>
+            <thead><tr><th>Tool</th><th>Page Views</th><th>% of Traffic</th><th>Revenue Est.</th></tr></thead>
+            <tbody id="tools-table">
+              <tr><td>📱 QR Code Generator</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>🖼️ PDF to JPG</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>🎂 Age Calculator</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>📎 Merge PDF</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>🔍 Image to Text</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>💱 Currency Converter</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>✍️ PDF Sign</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>⚖️ BMI Calculator</td><td>—</td><td>—</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;font-size:13px;color:var(--muted);">
+          💡 Get real page view data from <a href="https://analytics.google.com" target="_blank" style="color:var(--accent);">Google Analytics → Reports → Pages</a>
+        </div>
+      </div>
+
+      <!-- LOG INCOME PAGE -->
+      <div class="page" id="page-income">
+        <div class="page-header"><div class="page-title">📝 Log Income</div></div>
+        <div class="entry-form">
+          <h3>➕ Add Income Entry</h3>
+          <div class="form-grid">
+            <select id="e2-source">
+              <option value="adsense">Google AdSense</option>
+              <option value="nordvpn">NordVPN</option>
+              <option value="namecheap">Namecheap</option>
+              <option value="canva">Canva</option>
+              <option value="grammarly">Grammarly</option>
+              <option value="godaddy">GoDaddy</option>
+              <option value="other">Other</option>
+            </select>
+            <input type="number" id="e2-amount" placeholder="Amount ($)" step="0.01">
+            <input type="date" id="e2-date">
+            <input type="text" id="e2-note" placeholder="Note">
+          </div>
+          <button class="save-btn" onclick="addEntry2()">Save Entry</button>
+        </div>
+        <div class="table-card">
+          <div class="table-header">📋 All Entries</div>
+          <table><thead><tr><th>Date</th><th>Source</th><th>Amount</th><th>Note</th><th>Del</th></tr></thead><tbody id="income-table2"></tbody></table>
+        </div>
+      </div>
+
+      <!-- CHECKLIST PAGE -->
+      <div class="page" id="page-checklist">
+        <div class="page-header"><div class="page-title">✅ Setup Checklist</div></div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;">
+          <div class="check-item"><span style="font-size:18px;">✅</span><div class="check-text">toolnova.tools yayında</div><span class="status-pill pill-active">Done</span></div>
+          <div class="check-item"><span style="font-size:18px;">✅</span><div class="check-text">Google Analytics (G-3V90PDJDP1)</div><span class="status-pill pill-active">Done</span></div>
+          <div class="check-item"><span style="font-size:18px;">✅</span><div class="check-text">Google AdSense kodu eklendi (ca-pub-3359266836868361)</div><span class="status-pill pill-active">Done</span></div>
+          <div class="check-item"><span style="font-size:18px;">✅</span><div class="check-text">ads.txt yüklendi</div><span class="status-pill pill-active">Done</span></div>
+          <div class="check-item"><span style="font-size:18px;">✅</span><div class="check-text">Sitemap eklendi (30+ sayfa)</div><span class="status-pill pill-active">Done</span></div>
+          <div class="check-item"><span style="font-size:18px;">✅</span><div class="check-text">Google Search Console bağlandı</div><span class="status-pill pill-active">Done</span></div>
+          <div class="check-item"><span style="font-size:18px;">✅</span><div class="check-text">13 calculator/converter sayfası (SEO)</div><span class="status-pill pill-active">Done</span></div>
+          <div class="check-item"><span style="font-size:18px;">✅</span><div class="check-text">17 PDF tool sayfası eklendi</div><span class="status-pill pill-active">Done</span></div>
+          <div class="check-item"><span style="font-size:18px;">✅</span><div class="check-text">PDF Sign tool eklendi</div><span class="status-pill pill-active">Done</span></div>
+          <div class="check-item"><span style="font-size:18px;">✅</span><div class="check-text">15 dil çevirisi aktif</div><span class="status-pill pill-active">Done</span></div>
+          <div class="check-item"><span style="font-size:18px;">✅</span><div class="check-text">Chrome Extension Web Store'a gönderildi</div><span class="status-pill pill-active">Done</span></div>
+          <div class="check-item"><span style="font-size:18px;">✅</span><div class="check-text">Privacy Policy sayfası eklendi</div><span class="status-pill pill-active">Done</span></div>
+          <div class="check-item"><span style="font-size:18px;">⏳</span><div class="check-text">AdSense onayı</div><span class="status-pill pill-pending">2-4 hafta</span></div>
+          <div class="check-item"><span style="font-size:18px;">⏳</span><div class="check-text">Chrome Web Store onayı</div><span class="status-pill pill-pending">1-3 gün</span></div>
+          <div class="check-item"><span style="font-size:18px;">⏳</span><div class="check-text">HTTPS aktif et (DNS yayılınca)</div><span class="status-pill pill-pending">Bekliyor</span></div>
+          <div class="check-item"><span style="font-size:18px;">⏳</span><div class="check-text">NordVPN affiliate başvurusu</div><span class="status-pill pill-pending">Yapılacak</span></div>
+          <div class="check-item"><span style="font-size:18px;">❌</span><div class="check-text">Namecheap affiliate</div><span class="status-pill pill-declined">Reddedildi</span></div>
+        </div>
+      </div>
+
+      <!-- QUICK LINKS PAGE -->
+      <div class="page" id="page-links">
+        <div class="page-header"><div class="page-title">🔗 Quick Links</div></div>
+        <div class="links-grid">
+          <a class="link-card" href="https://adsense.google.com" target="_blank"><div class="link-icon">📺</div><div class="link-name">Google AdSense</div><div class="link-desc">Ad revenue dashboard</div></a>
+          <a class="link-card" href="https://analytics.google.com" target="_blank"><div class="link-icon">📊</div><div class="link-name">Google Analytics</div><div class="link-desc">Visitor statistics</div></a>
+          <a class="link-card" href="https://app.impact.com" target="_blank"><div class="link-icon">🤝</div><div class="link-name">Impact.com</div><div class="link-desc">Affiliate earnings</div></a>
+          <a class="link-card" href="https://search.google.com/search-console" target="_blank"><div class="link-icon">🔍</div><div class="link-name">Search Console</div><div class="link-desc">SEO & indexing</div></a>
+          <a class="link-card" href="https://github.com/gozetenhidayet/toolnova.tools" target="_blank"><div class="link-icon">💻</div><div class="link-name">GitHub Repo</div><div class="link-desc">Update site files</div></a>
+          <a class="link-card" href="https://toolnova.tools" target="_blank"><div class="link-icon">🌐</div><div class="link-name">toolnova.tools</div><div class="link-desc">View live site</div></a>
+          <a class="link-card" href="https://chrome.google.com/webstore/devconsole" target="_blank"><div class="link-icon">🧩</div><div class="link-name">Chrome Web Store</div><div class="link-desc">Extension status</div></a>
+          <a class="link-card" href="https://nordvpn.com/affiliate" target="_blank"><div class="link-icon">🔒</div><div class="link-name">NordVPN Affiliate</div><div class="link-desc">$30-100/sale</div></a>
+          <a class="link-card" href="https://canva.com/affiliates" target="_blank"><div class="link-icon">🎨</div><div class="link-name">Canva Affiliate</div><div class="link-desc">80% first month</div></a>
+          <a class="link-card" href="https://grammarly.com/affiliates" target="_blank"><div class="link-icon">✍️</div><div class="link-name">Grammarly Affiliate</div><div class="link-desc">$20/pro signup</div></a>
+          <a class="link-card" href="https://dash.godaddy.com" target="_blank"><div class="link-icon">🌐</div><div class="link-name">GoDaddy Dashboard</div><div class="link-desc">Domain management</div></a>
+          <a class="link-card" href="https://toolnova.tools/admin.html" target="_blank"><div class="link-icon">⚙️</div><div class="link-name">Admin Panel</div><div class="link-desc">This page</div></a>
+        </div>
+      </div>
+
+    </div><!-- end main -->
+  </div><!-- end layout -->
+</div><!-- end dashboard -->
 
 <script>
-const PASSWORD = '2026@toolnova.tools';
+const PASSWORD='2026@toolnova.tools';
+let entries=[],traffic={today:0,week:0,month:0,all:0},countries=[],currentPeriod='today';
+let revenueChart,sourceChart,projectionChart,trafficChart;
 
-function tryLogin() {
-  const input = document.getElementById('pw-input').value;
-  if (input === PASSWORD) {
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('dashboard').style.display = 'block';
-    document.getElementById('last-updated').textContent = 'Last updated: ' + new Date().toLocaleString();
-    sessionStorage.setItem('tn_auth', '1');
-  } else {
-    document.getElementById('login-error').style.display = 'block';
-    document.getElementById('pw-input').value = '';
-    document.getElementById('pw-input').focus();
+// AUTH
+function tryLogin(){
+  if(document.getElementById('pw-input').value===PASSWORD){
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('dashboard').style.display='block';
+    sessionStorage.setItem('tn_auth','1');
+    initDashboard();
+  }else{
+    document.getElementById('login-error').style.display='block';
+    document.getElementById('pw-input').value='';
   }
 }
-
-function logout() {
-  sessionStorage.removeItem('tn_auth');
-  document.getElementById('login-screen').style.display = 'flex';
-  document.getElementById('dashboard').style.display = 'none';
-  document.getElementById('pw-input').value = '';
+function logout(){sessionStorage.removeItem('tn_auth');location.reload();}
+if(sessionStorage.getItem('tn_auth')==='1'){
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('dashboard').style.display='block';
+  initDashboard();
 }
 
-// Auto-login if session exists
-if (sessionStorage.getItem('tn_auth') === '1') {
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('dashboard').style.display = 'block';
-  document.getElementById('last-updated').textContent = 'Last updated: ' + new Date().toLocaleString();
+// CLOCK
+function updateClock(){
+  document.getElementById('clock').textContent=new Date().toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+}
+updateClock();setInterval(updateClock,60000);
+
+// NAVIGATION
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(i=>i.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+function setPeriod(p,el){
+  currentPeriod=p;
+  document.querySelectorAll('.period-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  updateKPIs();
+}
+
+// STORAGE
+function save(){localStorage.setItem('tn_entries',JSON.stringify(entries));localStorage.setItem('tn_traffic',JSON.stringify(traffic));localStorage.setItem('tn_countries',JSON.stringify(countries));}
+function load(){
+  try{entries=JSON.parse(localStorage.getItem('tn_entries')||'[]');}catch{entries=[];}
+  try{traffic=JSON.parse(localStorage.getItem('tn_traffic')||'{"today":0,"week":0,"month":0,"all":0}');}catch{traffic={today:0,week:0,month:0,all:0};}
+  try{countries=JSON.parse(localStorage.getItem('tn_countries')||'[]');}catch{countries=[];}
+}
+
+// INCOME
+function addEntry(){
+  const src=document.getElementById('e-source').value;
+  const amt=parseFloat(document.getElementById('e-amount').value);
+  const date=document.getElementById('e-date').value;
+  const note=document.getElementById('e-note').value;
+  if(!amt||!date){alert('Enter amount and date');return;}
+  entries.push({id:Date.now(),source:src,amount:amt,date,note});
+  save();renderIncome();updateKPIs();updateCharts();
+  document.getElementById('e-amount').value='';document.getElementById('e-note').value='';
+}
+function addEntry2(){
+  const src=document.getElementById('e2-source').value;
+  const amt=parseFloat(document.getElementById('e2-amount').value);
+  const date=document.getElementById('e2-date').value;
+  const note=document.getElementById('e2-note').value;
+  if(!amt||!date){alert('Enter amount and date');return;}
+  entries.push({id:Date.now(),source:src,amount:amt,date,note});
+  save();renderIncome();updateKPIs();updateCharts();
+  document.getElementById('e2-amount').value='';document.getElementById('e2-note').value='';
+}
+function deleteEntry(id){entries=entries.filter(e=>e.id!==id);save();renderIncome();updateKPIs();updateCharts();}
+
+const srcLabels={adsense:'📺 AdSense',nordvpn:'🔒 NordVPN',namecheap:'🌐 Namecheap',canva:'🎨 Canva',grammarly:'✍️ Grammarly',godaddy:'🌐 GoDaddy',other:'💰 Other'};
+
+function renderIncome(){
+  const sorted=[...entries].sort((a,b)=>new Date(b.date)-new Date(a.date));
+  const total=entries.reduce((s,e)=>s+e.amount,0);
+  ['income-table','income-table2'].forEach(id=>{
+    const tb=document.getElementById(id);
+    if(!tb)return;
+    tb.innerHTML=sorted.map(e=>`<tr><td>${e.date}</td><td>${srcLabels[e.source]||e.source}</td><td style="color:var(--green);font-weight:600;">$${e.amount.toFixed(2)}</td><td style="color:var(--muted)">${e.note||'—'}</td><td><button onclick="deleteEntry(${e.id})" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px;">×</button></td></tr>`).join('')||'<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:20px;">No entries yet</td></tr>';
+  });
+  const tel=document.getElementById('total-earned');
+  if(tel)tel.textContent='Total: $'+total.toFixed(2);
+}
+
+// TRAFFIC
+function saveTraffic(){
+  traffic.today=+document.getElementById('tr-today').value||0;
+  traffic.week=+document.getElementById('tr-week').value||0;
+  traffic.month=+document.getElementById('tr-month').value||0;
+  traffic.all=+document.getElementById('tr-all').value||0;
+  save();updateTrafficUI();
+}
+function updateTrafficUI(){
+  ['today','week','month','all'].forEach(k=>{
+    const el=document.getElementById('t-'+k);
+    if(el)el.textContent=traffic[k]?traffic[k].toLocaleString():'—';
+  });
+  document.getElementById('kpi-visitors').textContent=traffic.today?traffic.today.toLocaleString():'—';
+  ['tr-today','tr-week','tr-month','tr-all'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(el)el.value=[traffic.today,traffic.week,traffic.month,traffic.all][i]||'';
+  });
+}
+
+// COUNTRIES
+function addCountry(){
+  const flag=document.getElementById('c-flag').value;
+  const name=document.getElementById('c-country').value;
+  const v=+document.getElementById('c-visitors').value;
+  const pct=+document.getElementById('c-pct').value;
+  if(!name||!v){alert('Enter country and visitors');return;}
+  countries.push({flag,name,visitors:v,pct});
+  countries.sort((a,b)=>b.visitors-a.visitors);
+  save();renderCountries();
+  document.getElementById('c-flag').value='';document.getElementById('c-country').value='';
+  document.getElementById('c-visitors').value='';document.getElementById('c-pct').value='';
+}
+function renderCountries(){
+  const el=document.getElementById('countries-list');
+  if(!countries.length){el.innerHTML='<div style="color:var(--muted);font-size:13px;text-align:center;padding:20px;">No data yet.</div>';return;}
+  const max=countries[0].visitors;
+  el.innerHTML=countries.map(c=>`
+    <div class="country-row" style="margin-bottom:12px;">
+      <div class="flag">${c.flag||'🏳️'}</div>
+      <div style="min-width:140px;font-size:13px;">${c.name}</div>
+      <div class="bar-wrap"><div class="bar-fill" style="width:${Math.round(c.visitors/max*100)}%"></div></div>
+      <div style="min-width:80px;text-align:right;font-size:13px;color:var(--muted)">${c.visitors.toLocaleString()} <span style="font-size:11px;">(${c.pct}%)</span></div>
+    </div>`).join('');
+}
+
+// KPIs
+function getFiltered(){
+  const now=new Date();
+  return entries.filter(e=>{
+    const d=new Date(e.date);
+    if(currentPeriod==='today')return d.toDateString()===now.toDateString();
+    if(currentPeriod==='week'){const w=new Date(now);w.setDate(now.getDate()-7);return d>=w;}
+    if(currentPeriod==='month')return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();
+    if(currentPeriod==='year')return d.getFullYear()===now.getFullYear();
+    return true;
+  });
+}
+function updateKPIs(){
+  const filtered=getFiltered();
+  const total=filtered.reduce((s,e)=>s+e.amount,0);
+  const adsense=filtered.filter(e=>e.source==='adsense').reduce((s,e)=>s+e.amount,0);
+  const affiliate=filtered.filter(e=>e.source!=='adsense').reduce((s,e)=>s+e.amount,0);
+  document.getElementById('kpi-revenue').textContent='$'+total.toFixed(2);
+  document.getElementById('kpi-adsense').textContent='$'+adsense.toFixed(2);
+  document.getElementById('kpi-affiliate').textContent='$'+affiliate.toFixed(2);
+}
+
+// CHARTS
+function initCharts(){
+  const chartOpts={responsive:true,plugins:{legend:{labels:{color:'#8b90b8',font:{size:12}}}}};
+  const gridColor='rgba(45,49,84,0.5)';
+
+  // Revenue chart
+  revenueChart=new Chart(document.getElementById('revenue-chart').getContext('2d'),{
+    type:'line',data:{labels:[],datasets:[{label:'Revenue ($)',data:[],borderColor:'#4f63d2',backgroundColor:'rgba(79,99,210,0.1)',fill:true,tension:0.4}]},
+    options:{...chartOpts,scales:{x:{ticks:{color:'#8b90b8'},grid:{color:gridColor}},y:{ticks:{color:'#8b90b8',callback:v=>'$'+v},grid:{color:gridColor}}}}
+  });
+
+  // Source chart
+  sourceChart=new Chart(document.getElementById('source-chart').getContext('2d'),{
+    type:'doughnut',data:{labels:['AdSense','NordVPN','Canva','Grammarly','Other'],datasets:[{data:[0,0,0,0,0],backgroundColor:['#4f63d2','#0ba87e','#f39c12','#e74c3c','#8b90b8']}]},
+    options:{...chartOpts}
+  });
+
+  // Projection chart
+  projectionChart=new Chart(document.getElementById('projection-chart').getContext('2d'),{
+    type:'bar',data:{labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],datasets:[{label:'Revenue ($)',data:[0,0,0,0,0,0,0,0,0,0,0,0],backgroundColor:'rgba(79,99,210,0.6)'}]},
+    options:{...chartOpts,scales:{x:{ticks:{color:'#8b90b8'},grid:{color:gridColor}},y:{ticks:{color:'#8b90b8',callback:v=>'$'+v},grid:{color:gridColor}}}}
+  });
+
+  // Traffic chart
+  trafficChart=new Chart(document.getElementById('traffic-chart').getContext('2d'),{
+    type:'bar',data:{labels:['Today','This Week','This Month','All Time'],datasets:[{label:'Visitors',data:[0,0,0,0],backgroundColor:'rgba(11,168,126,0.6)'}]},
+    options:{...chartOpts,scales:{x:{ticks:{color:'#8b90b8'},grid:{color:gridColor}},y:{ticks:{color:'#8b90b8'},grid:{color:gridColor}}}}
+  });
+}
+
+function updateCharts(){
+  // Revenue over time (last 30 days)
+  const days=[];const amounts=[];
+  for(let i=29;i>=0;i--){
+    const d=new Date();d.setDate(d.getDate()-i);
+    const label=d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+    const dayTotal=entries.filter(e=>new Date(e.date).toDateString()===d.toDateString()).reduce((s,e)=>s+e.amount,0);
+    days.push(label);amounts.push(dayTotal);
+  }
+  revenueChart.data.labels=days;revenueChart.data.datasets[0].data=amounts;revenueChart.update();
+
+  // By source
+  const srcTotals={adsense:0,nordvpn:0,canva:0,grammarly:0,other:0};
+  entries.forEach(e=>{
+    if(srcTotals[e.source]!==undefined)srcTotals[e.source]+=e.amount;
+    else srcTotals.other+=e.amount;
+  });
+  sourceChart.data.datasets[0].data=Object.values(srcTotals);sourceChart.update();
+
+  // Monthly
+  const monthly=new Array(12).fill(0);
+  entries.filter(e=>new Date(e.date).getFullYear()===new Date().getFullYear()).forEach(e=>{monthly[new Date(e.date).getMonth()]+=e.amount;});
+  projectionChart.data.datasets[0].data=monthly;projectionChart.update();
+
+  // Traffic chart
+  trafficChart.data.datasets[0].data=[traffic.today,traffic.week,traffic.month,traffic.all];trafficChart.update();
+}
+
+function initDashboard(){
+  load();
+  // Set today's date defaults
+  const today=new Date().toISOString().split('T')[0];
+  ['e-date','e2-date'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=today;});
+  renderIncome();updateKPIs();updateTrafficUI();renderCountries();
+  initCharts();updateCharts();
 }
 </script>
 </body>
