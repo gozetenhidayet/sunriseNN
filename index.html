@@ -212,12 +212,12 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 4
 .affiliate-section h3{font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:700;margin-bottom:6px;}
 .affiliate-section p{color:var(--muted);font-size:14px;margin-bottom:20px;}
 .affiliate-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
-.aff-card{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px;text-decoration:none;display:block;transition:all .2s;}
-.aff-card:hover{border-color:var(--accent2);transform:translateY(-2px);}
+.aff-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:20px;text-decoration:none;display:block;transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.aff-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 6px 20px rgba(79,99,210,0.12);}
 .aff-card-icon{font-size:22px;margin-bottom:8px;}
 .aff-card-name{font-weight:600;font-size:13px;color:var(--text);margin-bottom:2px;}
 .aff-card-desc{font-size:12px;color:var(--muted);}
-.aff-earn{font-size:11px;font-weight:600;color:var(--accent2);margin-top:6px;}
+.aff-earn{font-size:11px;font-weight:600;color:var(--accent);margin-top:8px;}
 
 /* MODAL */
 .overlay{display:none;position:fixed;inset:0;background:rgba(26,29,46,0.5);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center;padding:20px;}
@@ -506,32 +506,56 @@ footer a:hover{color:var(--text);}
 
   <!-- AFFILIATE SECTION -->
   <div class="affiliate-section" id="recommended">
-    <h3>⭐ Recommended Tools</h3>
-    <p>Tools we use and trust. Handpicked for quality, reliability and value.</p>
+    <h3>⭐ Most Popular Right Now</h3>
+    <p>Trending tools used by thousands of people every day.</p>
     <div class="affiliate-grid">
-      <a class="aff-card" href="https://namecheap.com" target="_blank">
-        <div class="aff-card-icon">🌐</div>
-        <div class="aff-card-name">Namecheap</div>
-        <div class="aff-card-desc">Best domain registrar. Cheap, reliable, easy to use.</div>
-        <div class="aff-earn">★ Recommended</div>
+      <a class="aff-card" href="/pdf-to-jpg.html">
+        <div class="aff-card-icon">🖼️</div>
+        <div class="aff-card-name">PDF to JPG</div>
+        <div class="aff-card-desc">Convert PDF pages to high quality JPG images instantly.</div>
+        <div class="aff-earn">🔥 Most Popular</div>
       </a>
-      <a class="aff-card" href="https://canva.com" target="_blank">
-        <div class="aff-card-icon">🎨</div>
-        <div class="aff-card-name">Canva Pro</div>
-        <div class="aff-card-desc">Design anything beautifully. Free plan available.</div>
-        <div class="aff-earn">★ Recommended</div>
+      <a class="aff-card" href="/image-to-text.html">
+        <div class="aff-card-icon">🔍</div>
+        <div class="aff-card-name">Image to Text</div>
+        <div class="aff-card-desc">Extract text from any image using AI-powered OCR.</div>
+        <div class="aff-earn">🔥 Trending</div>
       </a>
-      <a class="aff-card" href="https://grammarly.com" target="_blank">
+      <a class="aff-card" href="/merge-pdf.html">
+        <div class="aff-card-icon">📎</div>
+        <div class="aff-card-name">Merge PDF</div>
+        <div class="aff-card-desc">Combine multiple PDF files into one document for free.</div>
+        <div class="aff-earn">🔥 Most Used</div>
+      </a>
+      <a class="aff-card" href="/qr-code-generator.html">
+        <div class="aff-card-icon">📱</div>
+        <div class="aff-card-name">QR Code Generator</div>
+        <div class="aff-card-desc">Generate QR codes for any URL or text. Download as PNG.</div>
+        <div class="aff-earn">⭐ Popular</div>
+      </a>
+      <a class="aff-card" href="/pdf-sign.html">
         <div class="aff-card-icon">✍️</div>
-        <div class="aff-card-name">Grammarly</div>
-        <div class="aff-card-desc">Write better emails, essays and messages instantly.</div>
-        <div class="aff-earn">★ Recommended</div>
+        <div class="aff-card-name">Sign PDF</div>
+        <div class="aff-card-desc">Draw or type your signature and place it on any PDF.</div>
+        <div class="aff-earn">⭐ New</div>
       </a>
-      <a class="aff-card" href="https://nordvpn.com" target="_blank">
-        <div class="aff-card-icon">🔒</div>
-        <div class="aff-card-name">NordVPN</div>
-        <div class="aff-card-desc">Stay private online. #1 rated VPN worldwide.</div>
-        <div class="aff-earn">★ Recommended</div>
+      <a class="aff-card" href="/password-generator.html">
+        <div class="aff-card-icon">🔐</div>
+        <div class="aff-card-name">Password Generator</div>
+        <div class="aff-card-desc">Generate strong, secure passwords instantly. Customizable.</div>
+        <div class="aff-earn">⭐ Popular</div>
+      </a>
+      <a class="aff-card" href="/age-calculator.html">
+        <div class="aff-card-icon">🎂</div>
+        <div class="aff-card-name">Age Calculator</div>
+        <div class="aff-card-desc">Find your exact age in years, months, days and hours.</div>
+        <div class="aff-earn">⭐ Popular</div>
+      </a>
+      <a class="aff-card" href="/word-counter.html">
+        <div class="aff-card-icon">📝</div>
+        <div class="aff-card-name">Word Counter</div>
+        <div class="aff-card-desc">Count words, characters and reading time live as you type.</div>
+        <div class="aff-earn">⭐ Popular</div>
       </a>
     </div>
   </div>
