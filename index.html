@@ -70,28 +70,32 @@ if('serviceWorker' in navigator){
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'en',
-    includedLanguages: 'tr,es,fr,de,ar,hi,pt,ja,ko,zh-CN,ru,it,nl,pl,sv',
+    includedLanguages: 'af,sq,am,ar,hy,az,eu,be,bn,bs,bg,ca,ceb,zh-CN,zh-TW,co,hr,cs,da,nl,eo,et,fi,fr,fy,gl,ka,de,el,gu,ht,ha,haw,he,hi,hmn,hu,is,ig,id,ga,it,ja,jw,kn,kk,km,ko,ku,ky,lo,la,lv,lt,lb,mk,mg,ms,ml,mt,mi,mr,mn,my,ne,no,ny,or,ps,fa,pl,pt,pa,ro,ru,sm,gd,sr,st,sn,sd,si,sk,sl,so,es,su,sw,sv,tl,tg,ta,te,th,tr,uk,ur,ug,uz,vi,cy,xh,yi,yo,zu',
     layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
     autoDisplay: false
   }, 'google_translate_element');
 }
 
-// Auto-detect browser language and translate
+// Auto-detect browser/country language and translate
 window.addEventListener('load', function() {
-  const browserLang = navigator.language || navigator.userLanguage;
-  const langCode = browserLang.split('-')[0];
-  const supportedLangs = ['tr','es','fr','de','ar','hi','pt','ja','ko','zh','ru','it','nl','pl','sv'];
-  
-  if (langCode !== 'en' && supportedLangs.includes(langCode)) {
-    setTimeout(function() {
-      const selectEl = document.querySelector('.goog-te-combo');
-      if (selectEl) {
-        const targetLang = langCode === 'zh' ? 'zh-CN' : langCode;
+  setTimeout(function() {
+    const browserLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0].toLowerCase();
+    if (browserLang === 'en') return;
+    
+    const selectEl = document.querySelector('.goog-te-combo');
+    if (selectEl) {
+      // Map some special cases
+      const langMap = {'zh': 'zh-CN', 'zht': 'zh-TW'};
+      const targetLang = langMap[browserLang] || browserLang;
+      
+      // Check if language exists in dropdown
+      const option = Array.from(selectEl.options).find(o => o.value === targetLang);
+      if (option) {
         selectEl.value = targetLang;
         selectEl.dispatchEvent(new Event('change'));
       }
-    }, 1500);
-  }
+    }
+  }, 1500);
 });
 </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
@@ -117,9 +121,14 @@ window.addEventListener('load', function() {
   cursor: pointer;
   outline: none;
   margin: 0 !important;
+  max-width: 130px;
+}
+.goog-te-gadget .goog-te-combo:focus {
+  border-color: var(--accent);
 }
 .goog-te-banner-frame { display: none !important; }
 body { top: 0 !important; }
+.goog-logo-link { display: none !important; }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
