@@ -5,6 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>toolnova.tools — Free Online Tools for Everyone</title>
 <meta name="description" content="Free online tools: QR code generator, image compressor, age calculator, unit converter, word counter and more. No signup needed.">
+
+<!-- PWA -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#4f63d2">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="toolnova">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('/sw.js')
+      .then(r=>console.log('SW registered'))
+      .catch(e=>console.log('SW error',e));
+  });
+}
+</script>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3V90PDJDP1"></script>
 <script>
@@ -492,14 +510,12 @@ footer a:hover{color:var(--text);}
 <footer>
   <div class="footer-logo">toolnova.tools</div>
   <p style="margin-bottom:14px;">
-    <a href="#">Home</a>
-    <a href="#">Privacy Policy</a>
-    <a href="#">Terms</a>
-    <a href="#">Contact</a>
-
+    <a href="/">Home</a>
+    <a href="/privacy-policy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/contact.html">Contact</a>
   </p>
-  <p>© 2025 toolnova.tools — All tools run in your browser. We never store your data.</p>
-  <p style="margin-top:6px;font-size:11px;">Some links on this page are affiliate links. We may earn a commission if you sign up.</p>
+  <p>© 2026 toolnova.tools — All tools run in your browser. We never store your data.</p>
 </footer>
 
 <!-- MODAL -->
