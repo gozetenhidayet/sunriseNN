@@ -197,14 +197,56 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 4
 
 /* TOOL GRID */
 .tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;}
-.tool-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:22px 18px;cursor:pointer;transition:all .2s;text-decoration:none;display:block;position:relative;}
-.tool-card:hover{border-color:var(--accent);box-shadow:0 4px 20px rgba(79,99,210,0.12);transform:translateY(-2px);}
-.tool-icon{font-size:28px;margin-bottom:12px;display:block;}
+.tool-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:22px 18px;cursor:pointer;transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s,border-color .25s;text-decoration:none;display:block;position:relative;overflow:hidden;}
+.tool-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(79,99,210,0.06) 0%,transparent 70%);opacity:0;transition:opacity .3s;}
+.tool-card:hover{border-color:var(--accent);box-shadow:0 8px 28px rgba(79,99,210,0.14);transform:translateY(-5px) scale(1.01);}
+.tool-card:hover::after{opacity:1;}
+.tool-card:active{transform:translateY(-2px) scale(.99);}
+
+.tool-icon-wrap{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;position:relative;}
+.tool-icon{font-size:26px;display:block;line-height:1;}
 .tool-name{font-weight:600;font-size:14px;margin-bottom:4px;color:var(--text);}
 .tool-desc{color:var(--muted);font-size:12px;line-height:1.5;}
 .tool-badge{position:absolute;top:10px;right:10px;background:var(--accent2-light);color:var(--accent2);font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:99px;}
 .tool-badge.hot{background:#fff3e6;color:#e07a20;}
-.tool-badge.pro{background:var(--accent-light);color:var(--accent);}
+
+/* Icon animations */
+@keyframes icon-spin{to{transform:rotate(360deg);}}
+@keyframes icon-bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+@keyframes icon-pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.18);}}
+@keyframes icon-shake{0%,100%{transform:rotate(0);}25%{transform:rotate(-10deg);}75%{transform:rotate(10deg);}}
+@keyframes icon-wobble{0%,100%{transform:rotate(0);}25%{transform:rotate(-7deg);}75%{transform:rotate(7deg);}}
+@keyframes icon-flip{0%,40%,100%{transform:rotateY(0);}50%,90%{transform:rotateY(180deg);}}
+@keyframes icon-write{0%,100%{transform:rotate(-10deg) translateX(0);}50%{transform:rotate(5deg) translateX(3px);}}
+@keyframes icon-hue{from{filter:hue-rotate(0deg);}to{filter:hue-rotate(360deg);}}
+@keyframes icon-squeeze{0%,100%{transform:scaleY(1);}50%{transform:scaleY(.65);}}
+@keyframes icon-ping{0%,100%{transform:scale(1);}70%{transform:scale(1.2);}}
+@keyframes icon-lock{0%,85%,100%{transform:rotate(0);}87%{transform:rotate(-6deg);}91%{transform:rotate(6deg);}95%{transform:rotate(-3deg);}98%{transform:rotate(2deg);}}
+@keyframes icon-float{0%,100%{transform:translateY(0) rotate(0);}33%{transform:translateY(-5px) rotate(-5deg);}66%{transform:translateY(-3px) rotate(4deg);}}
+@keyframes icon-tick{0%,48%,52%,100%{transform:scale(1);}50%{transform:scale(1.25);}}
+@keyframes icon-count{0%,100%{transform:scale(1) rotate(0);}25%{transform:scale(1.12) rotate(5deg);}75%{transform:scale(.93) rotate(-4deg);}}
+
+.anim-spin{animation:icon-spin 4s linear infinite;}
+.anim-bounce{animation:icon-bounce 2s ease infinite;}
+.anim-pulse{animation:icon-pulse 1.5s ease-in-out infinite;}
+.anim-shake{animation:icon-shake .9s ease-in-out infinite;}
+.anim-wobble{animation:icon-wobble 2.2s ease-in-out infinite;}
+.anim-flip{animation:icon-flip 2.5s ease-in-out infinite;}
+.anim-write{animation:icon-write 2s ease-in-out infinite;}
+.anim-hue{animation:icon-hue 3s linear infinite;}
+.anim-squeeze{animation:icon-squeeze 1.6s ease-in-out infinite;}
+.anim-ping{animation:icon-ping 2s cubic-bezier(0,.2,.8,1) infinite;}
+.anim-lock{animation:icon-lock 3s ease-in-out infinite;}
+.anim-float{animation:icon-float 2.5s ease-in-out infinite;}
+.anim-tick{animation:icon-tick 1s steps(1) infinite;}
+.anim-count{animation:icon-count 2s ease-in-out infinite;}
+
+/* Icon background colors */
+.ibg-red{background:#fef2f2;}.ibg-blue{background:#eef0fd;}.ibg-green{background:#e6f8f3;}.ibg-yellow{background:#fff7e6;}.ibg-purple{background:#f5f0ff;}.ibg-pink{background:#fff0f6;}.ibg-teal{background:#e6fff8;}.ibg-orange{background:#fff3e6;}.ibg-gray{background:#f0f2f8;}
+
+/* Ripple */
+.ripple-el{position:absolute;border-radius:50%;background:rgba(79,99,210,0.12);transform:scale(0);animation:ripple-anim .7s linear;pointer-events:none;}
+@keyframes ripple-anim{to{transform:scale(4);opacity:0;}}
 
 /* PRO BANNER */
 .pro-banner{background:linear-gradient(135deg,var(--accent) 0%,#3d4fb8 100%);border-radius:20px;padding:36px 40px;margin:40px 0;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
@@ -326,45 +368,45 @@ footer a:hover{color:var(--text);}
 
   <div class="section-title" id="pdf-converter">📄 PDF Converter <span class="section-badge">Most Popular</span></div>
   <div class="tool-grid">
-    <a class="tool-card" href="/pdf-to-word.html">
-      <span class="tool-icon">📄</span>
+    <a class="tool-card" href="/pdf-to-word.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-red"><span class="tool-icon anim-float">📄</span></div>
       <div class="tool-name">PDF to Word</div>
       <div class="tool-desc">Convert PDF files to editable Word documents instantly.</div>
       <span class="tool-badge hot">Hot</span>
     </a>
-    <a class="tool-card" href="/word-to-pdf.html">
-      <span class="tool-icon">📝</span>
+    <a class="tool-card" href="/word-to-pdf.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-blue"><span class="tool-icon anim-bounce">📝</span></div>
       <div class="tool-name">Word to PDF</div>
       <div class="tool-desc">Convert Word documents to PDF format. Fast and free.</div>
       <span class="tool-badge hot">Hot</span>
     </a>
-    <a class="tool-card" href="/pdf-to-jpg.html">
-      <span class="tool-icon">🖼️</span>
+    <a class="tool-card" href="/pdf-to-jpg.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-yellow"><span class="tool-icon anim-spin">🖼️</span></div>
       <div class="tool-name">PDF to JPG</div>
       <div class="tool-desc">Convert PDF pages to high quality JPG images.</div>
     </a>
-    <a class="tool-card" href="/jpg-to-pdf.html">
-      <span class="tool-icon">🔄</span>
+    <a class="tool-card" href="/jpg-to-pdf.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-green"><span class="tool-icon anim-flip">🔄</span></div>
       <div class="tool-name">JPG to PDF</div>
       <div class="tool-desc">Combine JPG images into a single PDF file.</div>
     </a>
-    <a class="tool-card" href="/pdf-to-excel.html">
-      <span class="tool-icon">📊</span>
+    <a class="tool-card" href="/pdf-to-excel.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-green"><span class="tool-icon anim-bounce">📊</span></div>
       <div class="tool-name">PDF to Excel</div>
       <div class="tool-desc">Extract tables from PDF into Excel spreadsheets.</div>
     </a>
-    <a class="tool-card" href="/pdf-to-png.html">
-      <span class="tool-icon">🖼️</span>
+    <a class="tool-card" href="/pdf-to-png.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-orange"><span class="tool-icon anim-pulse">🖼️</span></div>
       <div class="tool-name">PDF to PNG</div>
       <div class="tool-desc">Convert PDF pages to PNG images with transparency.</div>
     </a>
-    <a class="tool-card" href="/png-to-pdf.html">
-      <span class="tool-icon">🔄</span>
+    <a class="tool-card" href="/png-to-pdf.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-teal"><span class="tool-icon anim-spin">🔄</span></div>
       <div class="tool-name">PNG to PDF</div>
       <div class="tool-desc">Convert PNG images to PDF documents instantly.</div>
     </a>
-    <a class="tool-card" href="/pdf-to-text.html">
-      <span class="tool-icon">📋</span>
+    <a class="tool-card" href="/pdf-to-text.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-gray"><span class="tool-icon anim-wobble">📋</span></div>
       <div class="tool-name">PDF to Text</div>
       <div class="tool-desc">Extract all text content from any PDF file.</div>
     </a>
@@ -372,14 +414,14 @@ footer a:hover{color:var(--text);}
 
   <div class="section-title" id="ocr-tools">🔍 OCR Tools <span class="section-badge">New</span></div>
   <div class="tool-grid">
-    <a class="tool-card" href="/image-to-text.html">
-      <span class="tool-icon">🔍</span>
+    <a class="tool-card" href="/image-to-text.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-yellow"><span class="tool-icon anim-shake">🔍</span></div>
       <div class="tool-name">Image to Text (OCR)</div>
       <div class="tool-desc">Extract text from any image using AI recognition.</div>
       <span class="tool-badge hot">Hot</span>
     </a>
-    <a class="tool-card" href="/scan-pdf-to-text.html">
-      <span class="tool-icon">📱</span>
+    <a class="tool-card" href="/scan-pdf-to-text.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-gray"><span class="tool-icon anim-wobble">📱</span></div>
       <div class="tool-name">Scan PDF to Text</div>
       <div class="tool-desc">Make scanned PDFs searchable with OCR technology.</div>
     </a>
@@ -387,40 +429,40 @@ footer a:hover{color:var(--text);}
 
   <div class="section-title" id="edit-pdf">✂️ Edit PDF</div>
   <div class="tool-grid">
-    <a class="tool-card" href="/merge-pdf.html">
-      <span class="tool-icon">📎</span>
+    <a class="tool-card" href="/merge-pdf.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-green"><span class="tool-icon anim-bounce">📎</span></div>
       <div class="tool-name">Merge PDF</div>
       <div class="tool-desc">Combine multiple PDF files into one document.</div>
       <span class="tool-badge hot">Hot</span>
     </a>
-    <a class="tool-card" href="/split-pdf.html">
-      <span class="tool-icon">✂️</span>
+    <a class="tool-card" href="/split-pdf.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-yellow"><span class="tool-icon anim-squeeze">✂️</span></div>
       <div class="tool-name">Split PDF</div>
       <div class="tool-desc">Split a PDF into multiple separate files.</div>
     </a>
-    <a class="tool-card" href="/compress-pdf.html">
-      <span class="tool-icon">🗜️</span>
+    <a class="tool-card" href="/compress-pdf.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-blue"><span class="tool-icon anim-squeeze">🗜️</span></div>
       <div class="tool-name">Compress PDF</div>
       <div class="tool-desc">Reduce PDF file size without losing quality.</div>
       <span class="tool-badge hot">Hot</span>
     </a>
-    <a class="tool-card" href="/rotate-pdf.html">
-      <span class="tool-icon">🔃</span>
+    <a class="tool-card" href="/rotate-pdf.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-purple"><span class="tool-icon anim-spin">🔃</span></div>
       <div class="tool-name">Rotate PDF</div>
       <div class="tool-desc">Rotate PDF pages to any angle. 90, 180, 270 degrees.</div>
     </a>
-    <a class="tool-card" href="/delete-pdf-pages.html">
-      <span class="tool-icon">🗑️</span>
+    <a class="tool-card" href="/delete-pdf-pages.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-red"><span class="tool-icon anim-wobble">🗑️</span></div>
       <div class="tool-name">Delete PDF Pages</div>
       <div class="tool-desc">Remove unwanted pages from your PDF file.</div>
     </a>
-    <a class="tool-card" href="/extract-pdf-pages.html">
-      <span class="tool-icon">📤</span>
+    <a class="tool-card" href="/extract-pdf-pages.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-teal"><span class="tool-icon anim-bounce">📤</span></div>
       <div class="tool-name">Extract PDF Pages</div>
       <div class="tool-desc">Extract specific pages from a PDF document.</div>
     </a>
-    <a class="tool-card" href="/pdf-sign.html">
-      <span class="tool-icon">✍️</span>
+    <a class="tool-card" href="/pdf-sign.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-green"><span class="tool-icon anim-write">✍️</span></div>
       <div class="tool-name">Sign PDF</div>
       <div class="tool-desc">Draw, type or upload your signature and place it on any PDF page.</div>
       <span class="tool-badge hot">Hot</span>
@@ -429,24 +471,24 @@ footer a:hover{color:var(--text);}
 
   <div class="section-title" id="generators">🔧 Generators <span class="section-badge">Popular</span></div>
   <div class="tool-grid">
-    <a class="tool-card" href="/qr-code-generator.html">
-      <span class="tool-icon">📱</span>
+    <a class="tool-card" href="/qr-code-generator.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-blue"><span class="tool-icon anim-pulse">📱</span></div>
       <div class="tool-name">QR Code Generator</div>
       <div class="tool-desc">Turn any URL or text into a QR code. Download as PNG instantly.</div>
       <span class="tool-badge hot">Hot</span>
     </a>
-    <a class="tool-card" href="/password-generator.html">
-      <span class="tool-icon">🔐</span>
+    <a class="tool-card" href="/password-generator.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-orange"><span class="tool-icon anim-lock">🔐</span></div>
       <div class="tool-name">Password Generator</div>
       <div class="tool-desc">Strong, secure passwords of any length. Symbols, numbers, uppercase.</div>
     </a>
-    <a class="tool-card" href="/color-code-converter.html">
-      <span class="tool-icon">🎨</span>
+    <a class="tool-card" href="/color-code-converter.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-purple"><span class="tool-icon anim-hue">🎨</span></div>
       <div class="tool-name">Color Code Converter</div>
       <div class="tool-desc">Convert between HEX, RGB, and HSL color formats instantly.</div>
     </a>
-    <a class="tool-card" href="/lorem-ipsum-generator.html">
-      <span class="tool-icon">🔑</span>
+    <a class="tool-card" href="/lorem-ipsum-generator.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-gray"><span class="tool-icon anim-float">🔑</span></div>
       <div class="tool-name">Lorem Ipsum Generator</div>
       <div class="tool-desc">Generate placeholder text for designs and prototypes.</div>
     </a>
@@ -454,29 +496,29 @@ footer a:hover{color:var(--text);}
 
   <div class="section-title" id="calculators">🧮 Calculators</div>
   <div class="tool-grid">
-    <a class="tool-card" href="/age-calculator.html">
-      <span class="tool-icon">🎂</span>
+    <a class="tool-card" href="/age-calculator.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-pink"><span class="tool-icon anim-tick">🎂</span></div>
       <div class="tool-name">Age Calculator</div>
       <div class="tool-desc">Your exact age in years, months, days and hours.</div>
       <span class="tool-badge hot">Hot</span>
     </a>
-    <a class="tool-card" href="/bmi-calculator.html">
-      <span class="tool-icon">⚖️</span>
+    <a class="tool-card" href="/bmi-calculator.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-blue"><span class="tool-icon anim-wobble">⚖️</span></div>
       <div class="tool-name">BMI Calculator</div>
       <div class="tool-desc">Body Mass Index with US Imperial and Metric support.</div>
     </a>
-    <a class="tool-card" href="/tip-calculator.html">
-      <span class="tool-icon">🍽️</span>
+    <a class="tool-card" href="/tip-calculator.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-yellow"><span class="tool-icon anim-ping">🍽️</span></div>
       <div class="tool-name">Tip Calculator</div>
       <div class="tool-desc">Split the bill and calculate tips for any group size.</div>
     </a>
-    <a class="tool-card" href="/discount-calculator.html">
-      <span class="tool-icon">🏷️</span>
+    <a class="tool-card" href="/discount-calculator.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-orange"><span class="tool-icon anim-bounce">🏷️</span></div>
       <div class="tool-name">Discount Calculator</div>
       <div class="tool-desc">Final price after any percentage discount. Quick math.</div>
     </a>
-    <a class="tool-card" href="/loan-calculator.html">
-      <span class="tool-icon">🏦</span>
+    <a class="tool-card" href="/loan-calculator.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-green"><span class="tool-icon anim-count">🏦</span></div>
       <div class="tool-name">Loan Calculator</div>
       <div class="tool-desc">Monthly payment, total interest on any loan. US-style.</div>
     </a>
@@ -484,24 +526,24 @@ footer a:hover{color:var(--text);}
 
   <div class="section-title" id="converters">🔄 Converters</div>
   <div class="tool-grid">
-    <a class="tool-card" href="/unit-converter.html">
-      <span class="tool-icon">📏</span>
+    <a class="tool-card" href="/unit-converter.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-gray"><span class="tool-icon anim-flip">📏</span></div>
       <div class="tool-name">Unit Converter</div>
       <div class="tool-desc">Length, weight, temperature, speed, volume — all units.</div>
     </a>
-    <a class="tool-card" href="/currency-converter.html">
-      <span class="tool-icon">💱</span>
+    <a class="tool-card" href="/currency-converter.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-teal"><span class="tool-icon anim-flip">💱</span></div>
       <div class="tool-name">Currency Converter</div>
       <div class="tool-desc">Convert between 15 major world currencies instantly.</div>
       <span class="tool-badge hot">Hot</span>
     </a>
-    <a class="tool-card" href="/text-case-converter.html">
-      <span class="tool-icon">🔤</span>
+    <a class="tool-card" href="/text-case-converter.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-purple"><span class="tool-icon anim-shake">🔤</span></div>
       <div class="tool-name">Text Case Converter</div>
       <div class="tool-desc">UPPER, lower, Title Case, camelCase in one click.</div>
     </a>
-    <a class="tool-card" href="/word-counter.html">
-      <span class="tool-icon">📝</span>
+    <a class="tool-card" href="/word-counter.html" onclick="addRipple(event,this)">
+      <div class="tool-icon-wrap ibg-blue"><span class="tool-icon anim-pulse">📝</span></div>
       <div class="tool-name">Word Counter</div>
       <div class="tool-desc">Words, characters, sentences, and reading time — live.</div>
     </a>
@@ -988,5 +1030,27 @@ function flipMem(i){
   }
 }
 </script>
+
+<script>
+// Ripple effect on card click
+function addRipple(e,card){
+  const r=document.createElement('div');
+  r.className='ripple-el';
+  const rect=card.getBoundingClientRect();
+  const size=Math.max(rect.width,rect.height)*2;
+  r.style.cssText=`width:${size}px;height:${size}px;left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px`;
+  card.appendChild(r);
+  setTimeout(()=>r.remove(),800);
+}
+// Mouse tracking for glow effect
+document.querySelectorAll('.tool-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const rect=card.getBoundingClientRect();
+    card.style.setProperty('--mx',((e.clientX-rect.left)/rect.width*100)+'%');
+    card.style.setProperty('--my',((e.clientY-rect.top)/rect.height*100)+'%');
+  });
+});
+</script>
+
 </body>
 </html>
