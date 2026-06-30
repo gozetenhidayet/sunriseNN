@@ -230,7 +230,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 4
 .stat-label{color:var(--muted);font-size:13px;margin-top:2px;}
 
 /* AD BANNER — top */
-.ad-banner{max-width:728px;margin:24px auto;padding:0 24px;text-align:center;}
+.ad-banner{max-width:728px;margin:24px auto;padding:0 24px;text-align:center;min-height:0;overflow:hidden;}
+.ad-banner ins.adsbygoogle{display:block;min-height:0!important;max-height:280px;overflow:hidden;}
+.ad-banner:empty,.ad-banner ins:empty{display:none;}
 .ad-placeholder{background:var(--surface);border:1.5px dashed var(--border);border-radius:var(--radius);padding:20px;color:var(--muted);font-size:13px;}
 
 /* SECTION */
@@ -346,7 +348,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 4
 .modal-sub{color:var(--muted);font-size:13px;margin-bottom:24px;}
 
 /* AD INSIDE MODAL */
-.modal-ad{background:var(--bg);border:1px dashed var(--border);border-radius:10px;padding:14px;text-align:center;color:var(--muted);font-size:12px;margin-top:20px;}
+.modal-ad{background:var(--bg);border:1px dashed var(--border);border-radius:10px;padding:14px;text-align:center;color:var(--muted);font-size:12px;margin-top:20px;max-height:280px;overflow:hidden;}
+.modal-ad ins.adsbygoogle{display:block;min-height:0!important;max-height:250px;overflow:hidden;}
 
 /* FORM */
 label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;}
@@ -808,6 +811,7 @@ function openTool(key){
   document.body.style.overflow='hidden';
   if(tool.init)tool.init();
   try{ (adsbygoogle = window.adsbygoogle || []).push({}); }catch(e){}
+  collapseEmptyAdSlots(document.getElementById('modal-content'));
 }
 function closeTool(){document.getElementById('overlay').classList.remove('active');document.body.style.overflow='';}
 function closeIfOutside(e){if(e.target===document.getElementById('overlay'))closeTool();}
@@ -1354,6 +1358,20 @@ document.querySelectorAll('.tool-card').forEach(card=>{
 // ════════════════════════════════════════════════════════════════════════════
 // FILE / PDF / OCR ENGINE
 // ════════════════════════════════════════════════════════════════════════════
+
+// Collapses any ad-banner / modal-ad slot that AdSense failed to fill (e.g. before
+// AdSense approval, or in preview/test environments) so it never leaves a blank gap.
+function collapseEmptyAdSlots(root){
+  (root||document).querySelectorAll('.ad-banner, .modal-ad').forEach(box=>{
+    setTimeout(()=>{
+      const ins = box.querySelector('ins.adsbygoogle');
+      const filled = ins && ins.getAttribute('data-ad-status') === 'filled';
+      const hasHeight = ins && ins.offsetHeight > 0 && ins.getAttribute('data-ad-status') !== 'unfilled';
+      if(!filled && !hasHeight){ box.style.display='none'; }
+    }, 1500);
+  });
+}
+document.addEventListener('DOMContentLoaded', ()=> collapseEmptyAdSlots(document));
 
 function showToast(msg){
   let t=document.getElementById('app-toast');
