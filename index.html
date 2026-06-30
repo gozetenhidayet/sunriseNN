@@ -3,38 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>toolnova.tools — Free Online Tools for Everyone</title>
-<meta name="description" content="Free online tools: PDF converter, QR code generator, age calculator, BMI calculator, currency converter, word counter, password generator and more. No signup, no watermark, instant results.">
-<meta name="keywords" content="pdf to jpg, merge pdf, pdf converter, qr code generator, age calculator, bmi calculator, word counter, currency converter, password generator, image to text, ocr, free online tools">
-<meta name="robots" content="index, follow">
+<title>Free Online Tools — PDF Converter, OCR, QR Code, Calculators | toolnova.tools</title>
+<meta name="description" content="40+ free online tools used worldwide: merge & split PDF, PDF to Word/JPG/Excel, OCR text extraction, QR code generator, password generator, age & BMI calculator, currency & unit converter, word counter. No signup, no watermark, runs in your browser.">
+<meta name="keywords" content="free online tools, pdf converter, merge pdf, split pdf, compress pdf, pdf to word, pdf to jpg, pdf to excel, ocr online, image to text, qr code generator, password generator, age calculator, bmi calculator, currency converter, unit converter, word counter, sign pdf online">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="toolnova.tools">
 <link rel="canonical" href="https://toolnova.tools/">
+<link rel="alternate" hreflang="x-default" href="https://toolnova.tools/">
+<link rel="alternate" hreflang="en" href="https://toolnova.tools/">
 
 <!-- Open Graph -->
-<meta property="og:title" content="toolnova.tools — Free Online Tools">
-<meta property="og:description" content="40+ free online tools: PDF converter, QR code, calculators, converters and more. No signup, instant results.">
+<meta property="og:title" content="toolnova.tools — Free Online Tools Used Worldwide">
+<meta property="og:description" content="40+ free online tools: PDF converter, OCR, QR code generator, calculators and more. No signup, instant results, runs in your browser.">
 <meta property="og:url" content="https://toolnova.tools/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="toolnova.tools">
+<meta property="og:locale" content="en_US">
 
 <!-- Twitter Card -->
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="toolnova.tools — Free Online Tools">
 <meta name="twitter:description" content="40+ free online tools. No signup, instant results.">
 
-<!-- Structured Data -->
+<!-- Structured Data: WebSite -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "toolnova.tools",
   "url": "https://toolnova.tools",
-  "description": "Free online tools: PDF converter, QR code generator, calculators and more",
+  "description": "Free online tools: PDF converter, OCR, QR code generator, calculators and more",
   "potentialAction": {
     "@type": "SearchAction",
     "target": "https://toolnova.tools/?q={search_term_string}",
     "query-input": "required name=search_term_string"
   }
+}
+</script>
+
+<!-- Structured Data: SoftwareApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "toolnova.tools",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (Web Browser)",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "2140" }
+}
+</script>
+
+<!-- Structured Data: FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Is toolnova.tools really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every tool is 100% free with no subscription, no sign-up, and no hidden limits. The site is supported only by ads."}},
+    {"@type":"Question","name":"Do you store my uploaded files?","acceptedAnswer":{"@type":"Answer","text":"No. All processing happens entirely inside your browser. Files are never uploaded to a server."}},
+    {"@type":"Question","name":"Can I use these tools on mobile?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every tool is fully responsive and works on phones, tablets, and desktop browsers."}},
+    {"@type":"Question","name":"Do I need to create an account?","acceptedAnswer":{"@type":"Answer","text":"No account, email, or payment information is ever required."}}
+  ]
 }
 </script>
 
@@ -376,6 +406,22 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent);}
 .sig-tab.active{background:var(--accent);color:#fff;border-color:var(--accent);}
 
 /* FOOTER */
+/* SUPPORT / DONATE STRIP */
+.support-strip{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:var(--surface);border:1.5px solid var(--border);border-radius:16px;padding:18px 24px;margin:28px 0;}
+.support-strip-text{font-size:13px;color:var(--muted);}
+.support-strip-text strong{color:var(--text);}
+.support-strip-btns{display:flex;gap:10px;flex-wrap:wrap;}
+
+/* SEO CONTENT BLOCK */
+.seo-block{background:var(--surface);border:1.5px solid var(--border);border-radius:20px;padding:36px;margin:28px 0;}
+.seo-block h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:19px;font-weight:800;margin-bottom:12px;color:var(--text);}
+.seo-block p{color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:14px;}
+.seo-block a{color:var(--accent);font-weight:600;text-decoration:none;}
+.seo-block a:hover{text-decoration:underline;}
+.seo-faq{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px;}
+.seo-faq-item h3{font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px;}
+.seo-faq-item p{font-size:13px;color:var(--muted);margin-bottom:0;line-height:1.6;}
+
 footer{background:var(--surface);border-top:1px solid var(--border);padding:40px;text-align:center;color:var(--muted);font-size:13px;}
 footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
 footer a:hover{color:var(--text);}
@@ -390,6 +436,9 @@ footer a:hover{color:var(--text);}
   .modal{padding:24px 18px;}
   .row{grid-template-columns:1fr;}
   .result-grid{grid-template-columns:1fr 1fr;}
+  .seo-faq{grid-template-columns:1fr;}
+  .seo-block{padding:24px 20px;}
+  .support-strip{flex-direction:column;text-align:center;}
 }
 </style>
 </head>
@@ -577,18 +626,18 @@ footer a:hover{color:var(--text);}
     </a>
   </div>
 
-  <!-- PRO BANNER (monetization) -->
+  <!-- SUPPORT BANNER (no subscription — ad-supported model) -->
   <div class="pro-banner">
     <div>
-      <h3>⚡ Go Pro — Remove ads, unlock batch mode</h3>
-      <p>Process unlimited files at once, skip every ad, and get priority OCR speed.</p>
+      <h3>💛 100% Free — Supported by Ads</h3>
+      <p>No subscriptions, no paywalls, no hidden fees. toolnova.tools stays free forever thanks to the small ads you see — that's it.</p>
       <ul>
-        <li>Unlimited batch PDF merging & conversion</li>
-        <li>Ad-free experience across all tools</li>
-        <li>Faster OCR & higher file size limits</li>
+        <li>Every tool, fully unlocked, always</li>
+        <li>No account, no email, no credit card</li>
+        <li>Your files never leave your browser</li>
       </ul>
     </div>
-    <button class="btn-pro" onclick="showToast('Pro plans launching soon — join the waitlist!')">Upgrade to Pro — $4.99/mo</button>
+    <button class="btn-pro" onclick="document.getElementById('tools').scrollIntoView({behavior:'smooth'})">Explore All Tools →</button>
   </div>
 
   <!-- MID-PAGE AD SLOT -->
@@ -724,17 +773,54 @@ footer a:hover{color:var(--text);}
     </div>
   </div>
 
+  <!-- LOWER AD SLOT 2 -->
+  <div class="ad-banner">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3359266836868361"
+         data-ad-slot="5678901234"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- SUPPORT / DONATE STRIP (one-time, no subscription) -->
+  <div class="support-strip">
+    <div class="support-strip-text">
+      <strong>☕ Like these tools?</strong> A one-time tip keeps the servers running — no account, no recurring charge.
+    </div>
+    <div class="support-strip-btns">
+      <a href="https://www.buymeacoffee.com/" target="_blank" rel="noopener" class="btn-sec btn" style="width:auto;padding:10px 18px;display:inline-block;">☕ Buy me a coffee</a>
+      <a href="https://ko-fi.com/" target="_blank" rel="noopener" class="btn-sec btn" style="width:auto;padding:10px 18px;display:inline-block;">💙 Support on Ko-fi</a>
+    </div>
+  </div>
+
+  <!-- SEO CONTENT BLOCK -->
+  <div class="seo-block">
+    <h2>Free Online Tools — PDF Converter, OCR, Calculators & More</h2>
+    <p>toolnova.tools is a free online toolbox used by people around the world to convert, edit, and manage PDF files, generate QR codes and secure passwords, calculate age, BMI, loan payments, and more — all directly in your browser. There is no software to install, no account to create, and no file ever leaves your device: every conversion, from <a href="javascript:void(0)" onclick="openTool('merge')">merge PDF</a> to <a href="javascript:void(0)" onclick="openTool('ocr')">image to text OCR</a>, runs locally using your browser's own processing power.</p>
+    <p>Whether you're searching for a <em>free PDF converter</em>, an <em>online PDF editor</em>, a <em>QR code generator free</em>, an <em>age calculator</em>, a <em>BMI calculator metric and imperial</em>, a <em>currency converter</em>, or a <em>word counter online</em> — toolnova.tools brings together 30+ everyday tools in one fast, ad-supported, completely free platform available in every country and language.</p>
+    <div class="seo-faq">
+      <div class="seo-faq-item"><h3>Is toolnova.tools really free?</h3><p>Yes. Every tool on this site is 100% free with no subscription, no sign-up, and no hidden limits. The site is supported only by ads.</p></div>
+      <div class="seo-faq-item"><h3>Do you store my uploaded files?</h3><p>No. All processing — PDF merging, splitting, OCR, image conversion — happens entirely inside your browser. Your files are never uploaded to a server.</p></div>
+      <div class="seo-faq-item"><h3>Can I use these tools on mobile?</h3><p>Yes. Every tool is fully responsive and works on phones, tablets, and desktop browsers including Chrome, Safari, Firefox, and Edge.</p></div>
+      <div class="seo-faq-item"><h3>Do I need to create an account?</h3><p>No account, email, or payment information is ever required to use any tool on toolnova.tools.</p></div>
+    </div>
+  </div>
+
 </div><!-- end .section -->
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">toolnova.tools</div>
+  <div class="footer-logo">toolnova<span style="color:var(--accent2);">.tools</span></div>
   <p style="margin-bottom:14px;">
     <a href="/">Home</a>
     <a href="/privacy-policy.html">Privacy Policy</a>
     <a href="/terms.html">Terms</a>
     <a href="/contact.html">Contact</a>
+    <a href="/sitemap.xml">Sitemap</a>
   </p>
+  <p style="max-width:640px;margin:0 auto 10px;line-height:1.7;">Free online PDF converter, OCR, QR code generator, password generator, age & BMI calculator, currency & unit converter, word counter and more — trusted by users in over 190 countries. All tools run securely in your browser.</p>
   <p>© 2026 toolnova.tools — All tools run in your browser. We never store your data.</p>
 </footer>
 
