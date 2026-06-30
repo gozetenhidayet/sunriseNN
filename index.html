@@ -169,11 +169,12 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 4
 
 /* HERO */
 .hero{text-align:center;padding:64px 20px 48px;background:linear-gradient(180deg,#fff 0%,var(--bg) 100%);border-bottom:1px solid var(--border);}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-light);color:var(--accent);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:5px 14px;border-radius:99px;margin-bottom:20px;border:1px solid rgba(79,99,210,0.2);}
-.hero h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(32px,5vw,56px);font-weight:800;line-height:1.15;margin-bottom:16px;color:var(--text);}
-.hero h1 em{font-style:normal;color:var(--accent);}
-.hero p{color:var(--muted);font-size:17px;max-width:480px;margin:0 auto 32px;}
-.search-wrap{max-width:460px;margin:0 auto;position:relative;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-light);color:var(--accent);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:5px 14px;border-radius:99px;margin-bottom:20px;border:1px solid rgba(79,99,210,0.2);animation:fade-up .6s ease both;}
+.hero h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(32px,5vw,56px);font-weight:800;line-height:1.15;margin-bottom:16px;color:var(--text);animation:fade-up .6s ease .08s both;}
+.hero h1 em{font-style:normal;color:var(--accent);background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.hero p{color:var(--muted);font-size:17px;max-width:480px;margin:0 auto 32px;animation:fade-up .6s ease .14s both;}
+.search-wrap{max-width:460px;margin:0 auto;position:relative;animation:fade-up .6s ease .2s both;}
+@keyframes fade-up{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 .search-wrap input{width:100%;background:var(--surface);border:1.5px solid var(--border);border-radius:99px;padding:14px 20px 14px 48px;color:var(--text);font-size:15px;outline:none;transition:border-color .2s;box-shadow:var(--shadow);}
 .search-wrap input:focus{border-color:var(--accent);}
 .search-wrap input::placeholder{color:var(--muted);}
@@ -197,7 +198,16 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 4
 
 /* TOOL GRID */
 .tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;}
-.tool-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:22px 18px;cursor:pointer;transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s,border-color .25s;text-decoration:none;display:block;position:relative;overflow:hidden;}
+.tool-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:22px 18px;cursor:pointer;transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s,border-color .25s;text-decoration:none;display:block;position:relative;overflow:hidden;opacity:0;animation:card-in .5s cubic-bezier(.22,1,.36,1) forwards;}
+@keyframes card-in{from{opacity:0;transform:translateY(16px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+.tool-grid .tool-card:nth-child(1){animation-delay:.02s;}
+.tool-grid .tool-card:nth-child(2){animation-delay:.06s;}
+.tool-grid .tool-card:nth-child(3){animation-delay:.10s;}
+.tool-grid .tool-card:nth-child(4){animation-delay:.14s;}
+.tool-grid .tool-card:nth-child(5){animation-delay:.18s;}
+.tool-grid .tool-card:nth-child(6){animation-delay:.22s;}
+.tool-grid .tool-card:nth-child(7){animation-delay:.26s;}
+.tool-grid .tool-card:nth-child(8){animation-delay:.30s;}
 .tool-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(79,99,210,0.06) 0%,transparent 70%);opacity:0;transition:opacity .3s;}
 .tool-card:hover{border-color:var(--accent);box-shadow:0 8px 28px rgba(79,99,210,0.14);transform:translateY(-5px) scale(1.01);}
 .tool-card:hover::after{opacity:1;}
@@ -289,8 +299,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 4
 
 /* MODAL */
 .overlay{display:none;position:fixed;inset:0;background:rgba(26,29,46,0.5);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center;padding:20px;}
-.overlay.active{display:flex;}
-.modal{background:var(--surface);border:1px solid var(--border);border-radius:20px;width:100%;max-width:540px;max-height:90vh;overflow-y:auto;padding:36px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.15);}
+.overlay.active{display:flex;animation:overlay-in .25s ease;}
+@keyframes overlay-in{from{opacity:0;}to{opacity:1;}}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:20px;width:100%;max-width:540px;max-height:90vh;overflow-y:auto;padding:36px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.15);animation:modal-in .3s cubic-bezier(.22,1,.36,1);}
+@keyframes modal-in{from{opacity:0;transform:translateY(24px) scale(.96);}to{opacity:1;transform:translateY(0) scale(1);}}
 .modal-close{position:absolute;top:14px;right:14px;background:var(--surface2);border:none;color:var(--muted);width:32px;height:32px;border-radius:99px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
 .modal-close:hover{background:var(--border);color:var(--text);}
 .modal h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:21px;font-weight:700;margin-bottom:4px;}
@@ -314,6 +326,37 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent);}
 .result-value.green{color:var(--accent2);}
 .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+
+/* FILE DROPZONE */
+.dropzone{border:2px dashed var(--border);border-radius:14px;padding:32px 20px;text-align:center;cursor:pointer;transition:all .25s;background:var(--surface2);margin-bottom:16px;position:relative;}
+.dropzone:hover,.dropzone.dragover{border-color:var(--accent);background:var(--accent-light);}
+.dropzone-icon{font-size:34px;margin-bottom:10px;display:block;animation:icon-float 2.5s ease-in-out infinite;}
+.dropzone-text{font-weight:600;font-size:14px;color:var(--text);margin-bottom:4px;}
+.dropzone-sub{font-size:12px;color:var(--muted);}
+.dropzone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.file-chip{display:flex;align-items:center;gap:10px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px;}
+.file-chip .fc-icon{font-size:18px;}
+.file-chip .fc-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;}
+.file-chip .fc-size{color:var(--muted);font-size:11px;}
+.file-chip .fc-x{cursor:pointer;color:var(--muted);font-weight:700;padding:0 4px;}
+.file-chip .fc-x:hover{color:#c0392b;}
+.progress-wrap{background:var(--border);border-radius:99px;height:8px;overflow:hidden;margin:14px 0;}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;transition:width .3s ease;border-radius:99px;}
+.spinner{width:18px;height:18px;border:2.5px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;display:inline-block;animation:spin .7s linear infinite;vertical-align:middle;margin-right:8px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.btn:disabled{opacity:.7;cursor:not-allowed;transform:none!important;}
+.page-thumb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px;margin:14px 0;max-height:340px;overflow-y:auto;padding:4px;}
+.page-thumb{position:relative;border:2px solid var(--border);border-radius:8px;overflow:hidden;cursor:pointer;transition:all .2s;background:#fff;}
+.page-thumb img{width:100%;display:block;}
+.page-thumb.selected{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,99,210,0.18);}
+.page-thumb .pt-num{position:absolute;bottom:0;left:0;right:0;background:rgba(26,29,46,0.7);color:#fff;font-size:10px;text-align:center;padding:2px 0;}
+.page-thumb .pt-check{position:absolute;top:4px;right:4px;width:18px;height:18px;border-radius:50%;background:#fff;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;}
+.page-thumb.selected .pt-check{background:var(--accent);border-color:var(--accent);color:#fff;}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:#fff;padding:12px 22px;border-radius:99px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:all .3s;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,0.2);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.sig-tabs{display:flex;gap:6px;margin-bottom:14px;}
+.sig-tab{flex:1;text-align:center;padding:9px;border-radius:8px;background:var(--surface2);border:1.5px solid var(--border);cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);transition:all .2s;}
+.sig-tab.active{background:var(--accent);color:#fff;border-color:var(--accent);}
 
 /* FOOTER */
 footer{background:var(--surface);border-top:1px solid var(--border);padding:40px;text-align:center;color:var(--muted);font-size:13px;}
@@ -383,44 +426,44 @@ footer a:hover{color:var(--text);}
 
   <div class="section-title" id="pdf-converter">📄 PDF Converter <span class="section-badge">Most Popular</span></div>
   <div class="tool-grid">
-    <a class="tool-card" href="/pdf-to-word.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('pdf2word')">
       <div class="tool-icon-wrap ibg-red"><span class="tool-icon anim-float">📄</span></div>
       <div class="tool-name">PDF to Word</div>
       <div class="tool-desc">Convert PDF files to editable Word documents instantly.</div>
       <span class="tool-badge hot">Hot</span>
     </a>
-    <a class="tool-card" href="/word-to-pdf.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('word2pdf')">
       <div class="tool-icon-wrap ibg-blue"><span class="tool-icon anim-bounce">📝</span></div>
       <div class="tool-name">Word to PDF</div>
       <div class="tool-desc">Convert Word documents to PDF format. Fast and free.</div>
       <span class="tool-badge hot">Hot</span>
     </a>
-    <a class="tool-card" href="/pdf-to-jpg.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('pdf2jpg')">
       <div class="tool-icon-wrap ibg-yellow"><span class="tool-icon anim-spin">🖼️</span></div>
       <div class="tool-name">PDF to JPG</div>
       <div class="tool-desc">Convert PDF pages to high quality JPG images.</div>
     </a>
-    <a class="tool-card" href="/jpg-to-pdf.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('img2pdf')">
       <div class="tool-icon-wrap ibg-green"><span class="tool-icon anim-flip">🔄</span></div>
       <div class="tool-name">JPG to PDF</div>
       <div class="tool-desc">Combine JPG images into a single PDF file.</div>
     </a>
-    <a class="tool-card" href="/pdf-to-excel.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('pdf2excel')">
       <div class="tool-icon-wrap ibg-green"><span class="tool-icon anim-bounce">📊</span></div>
       <div class="tool-name">PDF to Excel</div>
       <div class="tool-desc">Extract tables from PDF into Excel spreadsheets.</div>
     </a>
-    <a class="tool-card" href="/pdf-to-png.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('pdf2png')">
       <div class="tool-icon-wrap ibg-orange"><span class="tool-icon anim-pulse">🖼️</span></div>
       <div class="tool-name">PDF to PNG</div>
       <div class="tool-desc">Convert PDF pages to PNG images with transparency.</div>
     </a>
-    <a class="tool-card" href="/png-to-pdf.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('img2pdf')">
       <div class="tool-icon-wrap ibg-teal"><span class="tool-icon anim-spin">🔄</span></div>
       <div class="tool-name">PNG to PDF</div>
       <div class="tool-desc">Convert PNG images to PDF documents instantly.</div>
     </a>
-    <a class="tool-card" href="/pdf-to-text.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('pdf2text')">
       <div class="tool-icon-wrap ibg-gray"><span class="tool-icon anim-wobble">📋</span></div>
       <div class="tool-name">PDF to Text</div>
       <div class="tool-desc">Extract all text content from any PDF file.</div>
@@ -429,13 +472,13 @@ footer a:hover{color:var(--text);}
 
   <div class="section-title" id="ocr-tools">🔍 OCR Tools <span class="section-badge">New</span></div>
   <div class="tool-grid">
-    <a class="tool-card" href="/image-to-text.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('ocr')">
       <div class="tool-icon-wrap ibg-yellow"><span class="tool-icon anim-shake">🔍</span></div>
       <div class="tool-name">Image to Text (OCR)</div>
       <div class="tool-desc">Extract text from any image using AI recognition.</div>
       <span class="tool-badge hot">Hot</span>
     </a>
-    <a class="tool-card" href="/scan-pdf-to-text.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('scanocr')">
       <div class="tool-icon-wrap ibg-gray"><span class="tool-icon anim-wobble">📱</span></div>
       <div class="tool-name">Scan PDF to Text</div>
       <div class="tool-desc">Make scanned PDFs searchable with OCR technology.</div>
@@ -444,39 +487,39 @@ footer a:hover{color:var(--text);}
 
   <div class="section-title" id="edit-pdf">✂️ Edit PDF</div>
   <div class="tool-grid">
-    <a class="tool-card" href="/merge-pdf.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('merge')">
       <div class="tool-icon-wrap ibg-green"><span class="tool-icon anim-bounce">📎</span></div>
       <div class="tool-name">Merge PDF</div>
       <div class="tool-desc">Combine multiple PDF files into one document.</div>
       <span class="tool-badge hot">Hot</span>
     </a>
-    <a class="tool-card" href="/split-pdf.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('split')">
       <div class="tool-icon-wrap ibg-yellow"><span class="tool-icon anim-squeeze">✂️</span></div>
       <div class="tool-name">Split PDF</div>
       <div class="tool-desc">Split a PDF into multiple separate files.</div>
     </a>
-    <a class="tool-card" href="/compress-pdf.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('compress')">
       <div class="tool-icon-wrap ibg-blue"><span class="tool-icon anim-squeeze">🗜️</span></div>
       <div class="tool-name">Compress PDF</div>
       <div class="tool-desc">Reduce PDF file size without losing quality.</div>
       <span class="tool-badge hot">Hot</span>
     </a>
-    <a class="tool-card" href="/rotate-pdf.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('rotate')">
       <div class="tool-icon-wrap ibg-purple"><span class="tool-icon anim-spin">🔃</span></div>
       <div class="tool-name">Rotate PDF</div>
       <div class="tool-desc">Rotate PDF pages to any angle. 90, 180, 270 degrees.</div>
     </a>
-    <a class="tool-card" href="/delete-pdf-pages.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('deletepages')">
       <div class="tool-icon-wrap ibg-red"><span class="tool-icon anim-wobble">🗑️</span></div>
       <div class="tool-name">Delete PDF Pages</div>
       <div class="tool-desc">Remove unwanted pages from your PDF file.</div>
     </a>
-    <a class="tool-card" href="/extract-pdf-pages.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('extractpages')">
       <div class="tool-icon-wrap ibg-teal"><span class="tool-icon anim-bounce">📤</span></div>
       <div class="tool-name">Extract PDF Pages</div>
       <div class="tool-desc">Extract specific pages from a PDF document.</div>
     </a>
-    <a class="tool-card" href="/pdf-sign.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('sign')">
       <div class="tool-icon-wrap ibg-green"><span class="tool-icon anim-write">✍️</span></div>
       <div class="tool-name">Sign PDF</div>
       <div class="tool-desc">Draw, type or upload your signature and place it on any PDF page.</div>
@@ -486,23 +529,23 @@ footer a:hover{color:var(--text);}
 
   <div class="section-title" id="generators">🔧 Generators <span class="section-badge">Popular</span></div>
   <div class="tool-grid">
-    <a class="tool-card" href="/qr-code-generator.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('qr')">
       <div class="tool-icon-wrap ibg-blue"><span class="tool-icon anim-pulse">📱</span></div>
       <div class="tool-name">QR Code Generator</div>
       <div class="tool-desc">Turn any URL or text into a QR code. Download as PNG instantly.</div>
       <span class="tool-badge hot">Hot</span>
     </a>
-    <a class="tool-card" href="/password-generator.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('password')">
       <div class="tool-icon-wrap ibg-orange"><span class="tool-icon anim-lock">🔐</span></div>
       <div class="tool-name">Password Generator</div>
       <div class="tool-desc">Strong, secure passwords of any length. Symbols, numbers, uppercase.</div>
     </a>
-    <a class="tool-card" href="/color-code-converter.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('color')">
       <div class="tool-icon-wrap ibg-purple"><span class="tool-icon anim-hue">🎨</span></div>
       <div class="tool-name">Color Code Converter</div>
       <div class="tool-desc">Convert between HEX, RGB, and HSL color formats instantly.</div>
     </a>
-    <a class="tool-card" href="/lorem-ipsum-generator.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('hash')">
       <div class="tool-icon-wrap ibg-gray"><span class="tool-icon anim-float">🔑</span></div>
       <div class="tool-name">Lorem Ipsum Generator</div>
       <div class="tool-desc">Generate placeholder text for designs and prototypes.</div>
@@ -511,28 +554,28 @@ footer a:hover{color:var(--text);}
 
   <div class="section-title" id="calculators">🧮 Calculators</div>
   <div class="tool-grid">
-    <a class="tool-card" href="/age-calculator.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('age')">
       <div class="tool-icon-wrap ibg-pink"><span class="tool-icon anim-tick">🎂</span></div>
       <div class="tool-name">Age Calculator</div>
       <div class="tool-desc">Your exact age in years, months, days and hours.</div>
       <span class="tool-badge hot">Hot</span>
     </a>
-    <a class="tool-card" href="/bmi-calculator.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('bmi')">
       <div class="tool-icon-wrap ibg-blue"><span class="tool-icon anim-wobble">⚖️</span></div>
       <div class="tool-name">BMI Calculator</div>
       <div class="tool-desc">Body Mass Index with US Imperial and Metric support.</div>
     </a>
-    <a class="tool-card" href="/tip-calculator.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('tip')">
       <div class="tool-icon-wrap ibg-yellow"><span class="tool-icon anim-ping">🍽️</span></div>
       <div class="tool-name">Tip Calculator</div>
       <div class="tool-desc">Split the bill and calculate tips for any group size.</div>
     </a>
-    <a class="tool-card" href="/discount-calculator.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('discount')">
       <div class="tool-icon-wrap ibg-orange"><span class="tool-icon anim-bounce">🏷️</span></div>
       <div class="tool-name">Discount Calculator</div>
       <div class="tool-desc">Final price after any percentage discount. Quick math.</div>
     </a>
-    <a class="tool-card" href="/loan-calculator.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('loan')">
       <div class="tool-icon-wrap ibg-green"><span class="tool-icon anim-count">🏦</span></div>
       <div class="tool-name">Loan Calculator</div>
       <div class="tool-desc">Monthly payment, total interest on any loan. US-style.</div>
@@ -541,23 +584,23 @@ footer a:hover{color:var(--text);}
 
   <div class="section-title" id="converters">🔄 Converters</div>
   <div class="tool-grid">
-    <a class="tool-card" href="/unit-converter.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('unit')">
       <div class="tool-icon-wrap ibg-gray"><span class="tool-icon anim-flip">📏</span></div>
       <div class="tool-name">Unit Converter</div>
       <div class="tool-desc">Length, weight, temperature, speed, volume — all units.</div>
     </a>
-    <a class="tool-card" href="/currency-converter.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('currency')">
       <div class="tool-icon-wrap ibg-teal"><span class="tool-icon anim-flip">💱</span></div>
       <div class="tool-name">Currency Converter</div>
       <div class="tool-desc">Convert between 15 major world currencies instantly.</div>
       <span class="tool-badge hot">Hot</span>
     </a>
-    <a class="tool-card" href="/text-case-converter.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('case')">
       <div class="tool-icon-wrap ibg-purple"><span class="tool-icon anim-shake">🔤</span></div>
       <div class="tool-name">Text Case Converter</div>
       <div class="tool-desc">UPPER, lower, Title Case, camelCase in one click.</div>
     </a>
-    <a class="tool-card" href="/word-counter.html" onclick="addRipple(event,this)">
+    <a class="tool-card" href="javascript:void(0)" onclick="addRipple(event,this);openTool('wordcount')">
       <div class="tool-icon-wrap ibg-blue"><span class="tool-icon anim-pulse">📝</span></div>
       <div class="tool-name">Word Counter</div>
       <div class="tool-desc">Words, characters, sentences, and reading time — live.</div>
@@ -572,49 +615,49 @@ footer a:hover{color:var(--text);}
     <h3>⭐ Most Popular Right Now</h3>
     <p>Trending tools used by thousands of people every day.</p>
     <div class="affiliate-grid">
-      <a class="aff-card" href="/pdf-to-jpg.html">
+      <a class="aff-card" href="javascript:void(0)" onclick="openTool('pdf2jpg')">
         <div class="aff-card-icon">🖼️</div>
         <div class="aff-card-name">PDF to JPG</div>
         <div class="aff-card-desc">Convert PDF pages to high quality JPG images instantly.</div>
         <div class="aff-earn">🔥 Most Popular</div>
       </a>
-      <a class="aff-card" href="/image-to-text.html">
+      <a class="aff-card" href="javascript:void(0)" onclick="openTool('ocr')">
         <div class="aff-card-icon">🔍</div>
         <div class="aff-card-name">Image to Text</div>
         <div class="aff-card-desc">Extract text from any image using AI-powered OCR.</div>
         <div class="aff-earn">🔥 Trending</div>
       </a>
-      <a class="aff-card" href="/merge-pdf.html">
+      <a class="aff-card" href="javascript:void(0)" onclick="openTool('merge')">
         <div class="aff-card-icon">📎</div>
         <div class="aff-card-name">Merge PDF</div>
         <div class="aff-card-desc">Combine multiple PDF files into one document for free.</div>
         <div class="aff-earn">🔥 Most Used</div>
       </a>
-      <a class="aff-card" href="/qr-code-generator.html">
+      <a class="aff-card" href="javascript:void(0)" onclick="openTool('qr')">
         <div class="aff-card-icon">📱</div>
         <div class="aff-card-name">QR Code Generator</div>
         <div class="aff-card-desc">Generate QR codes for any URL or text. Download as PNG.</div>
         <div class="aff-earn">⭐ Popular</div>
       </a>
-      <a class="aff-card" href="/pdf-sign.html">
+      <a class="aff-card" href="javascript:void(0)" onclick="openTool('sign')">
         <div class="aff-card-icon">✍️</div>
         <div class="aff-card-name">Sign PDF</div>
         <div class="aff-card-desc">Draw or type your signature and place it on any PDF.</div>
         <div class="aff-earn">⭐ New</div>
       </a>
-      <a class="aff-card" href="/password-generator.html">
+      <a class="aff-card" href="javascript:void(0)" onclick="openTool('password')">
         <div class="aff-card-icon">🔐</div>
         <div class="aff-card-name">Password Generator</div>
         <div class="aff-card-desc">Generate strong, secure passwords instantly. Customizable.</div>
         <div class="aff-earn">⭐ Popular</div>
       </a>
-      <a class="aff-card" href="/age-calculator.html">
+      <a class="aff-card" href="javascript:void(0)" onclick="openTool('age')">
         <div class="aff-card-icon">🎂</div>
         <div class="aff-card-name">Age Calculator</div>
         <div class="aff-card-desc">Find your exact age in years, months, days and hours.</div>
         <div class="aff-earn">⭐ Popular</div>
       </a>
-      <a class="aff-card" href="/word-counter.html">
+      <a class="aff-card" href="javascript:void(0)" onclick="openTool('wordcount')">
         <div class="aff-card-icon">📝</div>
         <div class="aff-card-name">Word Counter</div>
         <div class="aff-card-desc">Count words, characters and reading time live as you type.</div>
@@ -643,6 +686,14 @@ footer a:hover{color:var(--text);}
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.1.1/tesseract.min.js"></script>
+<script>
+if (window['pdfjsLib']) {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
+</script>
 <script>
 // ── MODAL ENGINE ──────────────────────────────────────────────────────────────
 function openTool(key){
@@ -840,6 +891,118 @@ const TOOLS={
     title:'🃏 Memory Card Game',sub:'Find all matching pairs',
     render:()=>`<div id="mem-wrap"><button class="btn" onclick="startMemory()">Start Game</button></div>`,
     init(){}
+  },
+
+  // ── PDF TOOLS ──────────────────────────────────────────────────────────────
+  merge:{
+    title:'📎 Merge PDF',sub:'Combine multiple PDFs into one — drag to reorder',
+    render:()=>fileDropzone('merge-files','application/pdf',true)+`<div id="merge-list"></div><button class="btn" id="merge-btn" style="display:none;margin-top:10px;" onclick="doMergePDF()">Merge PDFs</button><div id="merge-out"></div>`,
+    init(){ setupDropzone('merge-files','merge-list','merge-btn',true,'application/pdf'); }
+  },
+
+  split:{
+    title:'✂️ Split PDF',sub:'Pick pages or a range to extract into a new PDF',
+    render:()=>fileDropzone('split-file','application/pdf',false)+`<div id="split-list"></div><div id="split-options" style="display:none;"><label>Pages (e.g. 1-3,5,7)</label><input type="text" id="split-range" placeholder="1-3,5"><button class="btn" onclick="doSplitPDF()">Split PDF</button></div><div id="split-out"></div>`,
+    init(){ setupDropzone('split-file','split-list','split-options',false,'application/pdf'); }
+  },
+
+  compress:{
+    title:'🗜️ Compress PDF',sub:'Shrink file size by re-optimizing the PDF structure',
+    render:()=>fileDropzone('compress-file','application/pdf',false)+`<div id="compress-list"></div><button class="btn" id="compress-btn" style="display:none;margin-top:10px;" onclick="doCompressPDF()">Compress PDF</button><div id="compress-out"></div>`,
+    init(){ setupDropzone('compress-file','compress-list','compress-btn',false,'application/pdf'); }
+  },
+
+  rotate:{
+    title:'🔃 Rotate PDF',sub:'Rotate all pages clockwise',
+    render:()=>fileDropzone('rotate-file','application/pdf',false)+`<div id="rotate-list"></div><div id="rotate-options" style="display:none;"><label>Rotation</label><select id="rotate-deg"><option value="90">90°</option><option value="180">180°</option><option value="270">270°</option></select><button class="btn" onclick="doRotatePDF()">Rotate PDF</button></div><div id="rotate-out"></div>`,
+    init(){ setupDropzone('rotate-file','rotate-list','rotate-options',false,'application/pdf'); }
+  },
+
+  deletepages:{
+    title:'🗑️ Delete PDF Pages',sub:'Click thumbnails to select pages to remove',
+    render:()=>fileDropzone('del-file','application/pdf',false)+`<div id="del-list"></div><div id="del-thumbs"></div><button class="btn" id="del-btn" style="display:none;margin-top:10px;" onclick="doDeletePages()">Delete Selected Pages</button><div id="del-out"></div>`,
+    init(){ setupDropzone('del-file','del-list',null,false,'application/pdf',renderPageThumbsForDelete); }
+  },
+
+  extractpages:{
+    title:'📤 Extract PDF Pages',sub:'Click thumbnails to select pages to keep',
+    render:()=>fileDropzone('ext-file','application/pdf',false)+`<div id="ext-list"></div><div id="ext-thumbs"></div><button class="btn" id="ext-btn" style="display:none;margin-top:10px;" onclick="doExtractPages()">Extract Selected Pages</button><div id="ext-out"></div>`,
+    init(){ setupDropzone('ext-file','ext-list',null,false,'application/pdf',renderPageThumbsForExtract); }
+  },
+
+  sign:{
+    title:'✍️ Sign PDF',sub:'Type, draw, or upload your signature and place it on a page',
+    render:()=>fileDropzone('sign-file','application/pdf',false)+`<div id="sign-list"></div>
+      <div id="sign-builder" style="display:none;">
+        <div class="sig-tabs">
+          <div class="sig-tab active" id="sigtab-type" onclick="switchSigTab('type')">Type</div>
+          <div class="sig-tab" id="sigtab-draw" onclick="switchSigTab('draw')">Draw</div>
+        </div>
+        <div id="sig-type-pane"><input type="text" id="sig-text" placeholder="Your Name" style="font-family:'Brush Script MT',cursive;font-size:22px;"></div>
+        <div id="sig-draw-pane" style="display:none;">
+          <canvas id="sig-canvas" width="460" height="140" style="width:100%;border:1.5px solid var(--border);border-radius:10px;background:#fff;touch-action:none;cursor:crosshair;"></canvas>
+          <button class="btn-sec btn" style="margin-top:8px;" onclick="clearSigCanvas()">Clear</button>
+        </div>
+        <label style="margin-top:14px;">Page Number</label>
+        <input type="number" id="sig-page" value="1" min="1">
+        <button class="btn" onclick="doSignPDF()">Add Signature & Download</button>
+      </div>
+      <div id="sign-out"></div>`,
+    init(){ setupDropzone('sign-file','sign-list','sign-builder',false,'application/pdf', ()=>{ setTimeout(initSigCanvas, 50); }); }
+  },
+
+  img2pdf:{
+    title:'🖼️ Image to PDF',sub:'Combine JPG/PNG images into a single PDF — drag to reorder',
+    render:()=>fileDropzone('i2p-files','image/*',true)+`<div id="i2p-list"></div><button class="btn" id="i2p-btn" style="display:none;margin-top:10px;" onclick="doImagesToPDF()">Create PDF</button><div id="i2p-out"></div>`,
+    init(){ setupDropzone('i2p-files','i2p-list','i2p-btn',true,'image/*'); }
+  },
+
+  pdf2jpg:{
+    title:'🖼️ PDF to JPG',sub:'Convert each page into a downloadable JPG image',
+    render:()=>fileDropzone('p2j-file','application/pdf',false)+`<div id="p2j-list"></div><button class="btn" id="p2j-btn" style="display:none;margin-top:10px;" onclick="doPdfToImages('jpeg')">Convert to JPG</button><div id="p2j-out"></div>`,
+    init(){ setupDropzone('p2j-file','p2j-list','p2j-btn',false,'application/pdf'); }
+  },
+
+  pdf2png:{
+    title:'🖼️ PDF to PNG',sub:'Convert each page into a downloadable PNG image',
+    render:()=>fileDropzone('p2n-file','application/pdf',false)+`<div id="p2n-list"></div><button class="btn" id="p2n-btn" style="display:none;margin-top:10px;" onclick="doPdfToImages('png')">Convert to PNG</button><div id="p2n-out"></div>`,
+    init(){ setupDropzone('p2n-file','p2n-list','p2n-btn',false,'application/pdf'); }
+  },
+
+  pdf2text:{
+    title:'📋 PDF to Text',sub:'Extract all text content from a PDF',
+    render:()=>fileDropzone('p2t-file','application/pdf',false)+`<div id="p2t-list"></div><button class="btn" id="p2t-btn" style="display:none;margin-top:10px;" onclick="doPdfToText()">Extract Text</button><div id="p2t-out"></div>`,
+    init(){ setupDropzone('p2t-file','p2t-list','p2t-btn',false,'application/pdf'); }
+  },
+
+  ocr:{
+    title:'🔍 Image to Text (OCR)',sub:'Extract text from any image using AI recognition',
+    render:()=>fileDropzone('ocr-file','image/*',false)+`<div id="ocr-list"></div><button class="btn" id="ocr-btn" style="display:none;margin-top:10px;" onclick="doOCR()">Extract Text</button><div id="ocr-out"></div>`,
+    init(){ setupDropzone('ocr-file','ocr-list','ocr-btn',false,'image/*'); }
+  },
+
+  scanocr:{
+    title:'📱 Scan PDF to Text (OCR)',sub:'Run OCR on a scanned PDF to extract searchable text',
+    render:()=>fileDropzone('socr-file','application/pdf',false)+`<div id="socr-list"></div><button class="btn" id="socr-btn" style="display:none;margin-top:10px;" onclick="doScanOCR()">Run OCR</button><div id="socr-out"></div>`,
+    init(){ setupDropzone('socr-file','socr-list','socr-btn',false,'application/pdf'); }
+  },
+
+  pdf2word:{
+    title:'📄 PDF to Word',sub:'Extract text from your PDF into an editable .doc file',
+    render:()=>fileDropzone('p2w-file','application/pdf',false)+`<div id="p2w-list"></div><button class="btn" id="p2w-btn" style="display:none;margin-top:10px;" onclick="doPdfToWord()">Convert to Word</button><div id="p2w-out"></div><p style="color:var(--muted);font-size:11px;margin-top:10px;">* Extracts text content; original visual layout/images are not preserved.</p>`,
+    init(){ setupDropzone('p2w-file','p2w-list','p2w-btn',false,'application/pdf'); }
+  },
+
+  word2pdf:{
+    title:'📝 Word to PDF',sub:'Convert a .docx file to PDF',
+    render:()=>fileDropzone('w2p-file','.docx','false')+`<div id="w2p-list"></div><button class="btn" id="w2p-btn" style="display:none;margin-top:10px;" onclick="doWordToPdf()">Convert to PDF</button><div id="w2p-out"></div><p style="color:var(--muted);font-size:11px;margin-top:10px;">* Converts text content; complex formatting/images may not be preserved.</p>`,
+    init(){ setupDropzone('w2p-file','w2p-list','w2p-btn',false,'.docx'); }
+  },
+
+  pdf2excel:{
+    title:'📊 PDF to Excel',sub:'Extract text/tables from a PDF into a .csv file',
+    render:()=>fileDropzone('p2e-file','application/pdf',false)+`<div id="p2e-list"></div><button class="btn" id="p2e-btn" style="display:none;margin-top:10px;" onclick="doPdfToExcel()">Convert to CSV</button><div id="p2e-out"></div><p style="color:var(--muted);font-size:11px;margin-top:10px;">* Best with PDFs containing simple tabular data.</p>`,
+    init(){ setupDropzone('p2e-file','p2e-list','p2e-btn',false,'application/pdf'); }
   },
 
 };
@@ -1057,6 +1220,706 @@ document.querySelectorAll('.tool-card').forEach(card=>{
     card.style.setProperty('--my',((e.clientY-rect.top)/rect.height*100)+'%');
   });
 });
+</script>
+
+<script>
+// ════════════════════════════════════════════════════════════════════════════
+// FILE / PDF / OCR ENGINE
+// ════════════════════════════════════════════════════════════════════════════
+
+function showToast(msg){
+  let t=document.getElementById('app-toast');
+  if(!t){t=document.createElement('div');t.id='app-toast';t.className='toast';document.body.appendChild(t);}
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),2600);
+}
+
+function fmtSize(b){
+  if(b<1024)return b+' B';
+  if(b<1024*1024)return (b/1024).toFixed(1)+' KB';
+  return (b/1024/1024).toFixed(2)+' MB';
+}
+
+// Generates the HTML for a dropzone + hidden file input
+function fileDropzone(id, accept, multiple){
+  return `<div class="dropzone" id="${id}-zone">
+    <span class="dropzone-icon">📁</span>
+    <div class="dropzone-text">Click to upload or drag & drop</div>
+    <div class="dropzone-sub">${multiple?'You can select multiple files':'Select a file'} — ${accept==='application/pdf'?'PDF':accept==='.docx'?'DOCX':accept.includes('image')?'JPG, PNG, WEBP':accept}</div>
+    <input type="file" id="${id}" accept="${accept}" ${multiple?'multiple':''}>
+  </div>`;
+}
+
+// Wires up a dropzone: drag/drop, click-to-upload, file chip list, reveal target button/panel.
+// onFilesReady(files) optional extra callback fired after files stored.
+function setupDropzone(inputId, listId, revealId, multiple, accept, onFilesReady){
+  const zone=document.getElementById(inputId+'-zone');
+  const input=document.getElementById(inputId);
+  const list=document.getElementById(listId);
+  if(!zone||!input)return;
+  zone._files=[];
+
+  function renderList(){
+    list.innerHTML=zone._files.map((f,i)=>`
+      <div class="file-chip">
+        <span class="fc-icon">${f.type.includes('pdf')?'📄':f.type.includes('image')?'🖼️':'📝'}</span>
+        <span class="fc-name">${f.name}</span>
+        <span class="fc-size">${fmtSize(f.size)}</span>
+        <span class="fc-x" onclick="removeDzFile('${inputId}','${listId}','${revealId||''}',${i})">✕</span>
+      </div>`).join('');
+    if(revealId){
+      const rev=document.getElementById(revealId);
+      if(rev) rev.style.display = zone._files.length ? '' : 'none';
+    }
+  }
+  window['_dzRender_'+inputId]=renderList;
+
+  function addFiles(fl){
+    const arr=Array.from(fl);
+    if(!multiple){ zone._files=arr.slice(0,1); }
+    else { zone._files=zone._files.concat(arr); }
+    renderList();
+    if(onFilesReady) onFilesReady(zone._files, inputId);
+  }
+
+  input.addEventListener('change', e=>{ if(e.target.files.length) addFiles(e.target.files); e.target.value=''; });
+  zone.addEventListener('dragover', e=>{ e.preventDefault(); zone.classList.add('dragover'); });
+  zone.addEventListener('dragleave', ()=> zone.classList.remove('dragover'));
+  zone.addEventListener('drop', e=>{
+    e.preventDefault(); zone.classList.remove('dragover');
+    if(e.dataTransfer.files.length) addFiles(e.dataTransfer.files);
+  });
+
+  zone.getFiles = ()=> zone._files;
+}
+
+function removeDzFile(inputId, listId, revealId, idx){
+  const zone=document.getElementById(inputId+'-zone');
+  zone._files.splice(idx,1);
+  window['_dzRender_'+inputId]();
+  if(zone._files.length===0){
+    ['merge-out','split-out','compress-out','rotate-out','del-out','ext-out','sign-out','i2p-out','p2j-out','p2n-out','p2t-out','ocr-out','socr-out','p2w-out','w2p-out','p2e-out'].forEach(id=>{const e=document.getElementById(id);if(e)e.innerHTML='';});
+  }
+}
+
+function getFiles(inputId){
+  const zone=document.getElementById(inputId+'-zone');
+  return zone ? zone._files : [];
+}
+
+function downloadBlob(blob, filename){
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download=filename; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url), 4000);
+}
+
+function progressHTML(id, label){
+  return `<div class="result-box" style="margin-top:16px;"><div class="result-label">${label}</div><div class="progress-wrap"><div class="progress-bar" id="${id}-bar" style="width:5%;"></div></div></div>`;
+}
+function setProgress(id, pct){
+  const b=document.getElementById(id+'-bar'); if(b) b.style.width=Math.min(100,pct)+'%';
+}
+function btnLoading(btn, text){
+  btn._orig = btn._orig || btn.textContent;
+  btn.disabled = true;
+  btn.innerHTML = `<span class="spinner"></span>${text}`;
+}
+function btnReset(btn){
+  btn.disabled = false;
+  btn.textContent = btn._orig || btn.textContent;
+}
+
+async function fileToArrayBuffer(file){
+  return await file.arrayBuffer();
+}
+
+// ── MERGE PDF ─────────────────────────────────────────────────────────────────
+async function doMergePDF(){
+  const files=getFiles('merge-files');
+  if(files.length<2){alert('Please add at least 2 PDF files to merge.');return;}
+  const btn=document.getElementById('merge-btn');
+  const out=document.getElementById('merge-out');
+  btnLoading(btn,'Merging...');
+  out.innerHTML=progressHTML('merge-prog','Merging PDFs...');
+  try{
+    const { PDFDocument } = PDFLib;
+    const merged = await PDFDocument.create();
+    for(let i=0;i<files.length;i++){
+      const bytes = await fileToArrayBuffer(files[i]);
+      const src = await PDFDocument.load(bytes, {ignoreEncryption:true});
+      const pages = await merged.copyPages(src, src.getPageIndices());
+      pages.forEach(p=>merged.addPage(p));
+      setProgress('merge-prog', 10 + (i+1)/files.length*85);
+    }
+    const bytes = await merged.save();
+    setProgress('merge-prog',100);
+    out.innerHTML=`<div class="result-box green" style="margin-top:16px;"><div class="result-label">✓ Merged Successfully</div><div style="margin:10px 0;color:var(--muted);font-size:13px;">${files.length} files combined into one PDF.</div><button class="btn" onclick='downloadMergedPDF()'>⬇ Download merged.pdf</button></div>`;
+    window._mergedPdfBytes = bytes;
+  }catch(err){
+    out.innerHTML=`<div class="result-box" style="margin-top:16px;color:#c0392b;">Error: ${err.message||'Could not merge PDFs. Make sure all files are valid PDFs.'}</div>`;
+  }
+  btnReset(btn);
+}
+function downloadMergedPDF(){ downloadBlob(new Blob([window._mergedPdfBytes],{type:'application/pdf'}), 'merged.pdf'); showToast('Downloaded!'); }
+
+// ── SPLIT PDF ─────────────────────────────────────────────────────────────────
+function parsePageRange(str, max){
+  const pages=new Set();
+  str.split(',').forEach(part=>{
+    part=part.trim(); if(!part)return;
+    if(part.includes('-')){
+      const [a,b]=part.split('-').map(n=>parseInt(n.trim(),10));
+      if(!isNaN(a)&&!isNaN(b)){ for(let i=Math.min(a,b); i<=Math.max(a,b); i++) if(i>=1&&i<=max) pages.add(i); }
+    } else {
+      const n=parseInt(part,10);
+      if(!isNaN(n) && n>=1 && n<=max) pages.add(n);
+    }
+  });
+  return Array.from(pages).sort((a,b)=>a-b);
+}
+async function doSplitPDF(){
+  const files=getFiles('split-file');
+  if(!files.length){alert('Please upload a PDF.');return;}
+  const rangeStr=document.getElementById('split-range').value.trim();
+  if(!rangeStr){alert('Enter a page range, e.g. 1-3,5');return;}
+  const out=document.getElementById('split-out');
+  out.innerHTML=progressHTML('split-prog','Splitting PDF...');
+  try{
+    const { PDFDocument } = PDFLib;
+    const bytes = await fileToArrayBuffer(files[0]);
+    const src = await PDFDocument.load(bytes, {ignoreEncryption:true});
+    const max=src.getPageCount();
+    const pages=parsePageRange(rangeStr, max);
+    if(!pages.length){ out.innerHTML='<div class="result-box" style="color:#c0392b;">No valid pages found in that range.</div>'; return; }
+    setProgress('split-prog',40);
+    const newDoc = await PDFDocument.create();
+    const copied = await newDoc.copyPages(src, pages.map(p=>p-1));
+    copied.forEach(p=>newDoc.addPage(p));
+    setProgress('split-prog',90);
+    const outBytes = await newDoc.save();
+    setProgress('split-prog',100);
+    window._splitPdfBytes = outBytes;
+    out.innerHTML=`<div class="result-box green" style="margin-top:16px;"><div class="result-label">✓ Split Complete</div><div style="margin:10px 0;color:var(--muted);font-size:13px;">${pages.length} of ${max} pages extracted.</div><button class="btn" onclick="downloadBlob(new Blob([window._splitPdfBytes],{type:'application/pdf'}),'split.pdf');showToast('Downloaded!')">⬇ Download split.pdf</button></div>`;
+  }catch(err){
+    out.innerHTML=`<div class="result-box" style="margin-top:16px;color:#c0392b;">Error: ${err.message||'Could not read this PDF.'}</div>`;
+  }
+}
+
+// ── COMPRESS PDF ──────────────────────────────────────────────────────────────
+async function doCompressPDF(){
+  const files=getFiles('compress-file');
+  if(!files.length){alert('Please upload a PDF.');return;}
+  const btn=document.getElementById('compress-btn');
+  const out=document.getElementById('compress-out');
+  btnLoading(btn,'Compressing...');
+  out.innerHTML=progressHTML('compress-prog','Optimizing PDF...');
+  try{
+    const { PDFDocument } = PDFLib;
+    const origSize=files[0].size;
+    const bytes=await fileToArrayBuffer(files[0]);
+    setProgress('compress-prog',30);
+    const doc=await PDFDocument.load(bytes, {ignoreEncryption:true, updateMetadata:false});
+    setProgress('compress-prog',60);
+    const outBytes=await doc.save({useObjectStreams:true, addDefaultPage:false});
+    setProgress('compress-prog',100);
+    const newSize=outBytes.byteLength;
+    const pct = origSize>newSize ? Math.round((1-newSize/origSize)*100) : 0;
+    window._compressedPdfBytes=outBytes;
+    out.innerHTML=`<div class="result-grid result-box green" style="margin-top:16px;">
+      <div><div class="result-label">Original</div><div class="result-value green">${fmtSize(origSize)}</div></div>
+      <div><div class="result-label">Compressed</div><div class="result-value green">${fmtSize(newSize)}</div></div>
+      </div>
+      <div style="margin:10px 0;color:var(--muted);font-size:13px;">${pct>0?`Reduced by ~${pct}%.`:'This PDF is already well-optimized — structural compression applied.'}</div>
+      <button class="btn" onclick="downloadBlob(new Blob([window._compressedPdfBytes],{type:'application/pdf'}),'compressed.pdf');showToast('Downloaded!')">⬇ Download compressed.pdf</button>`;
+  }catch(err){
+    out.innerHTML=`<div class="result-box" style="margin-top:16px;color:#c0392b;">Error: ${err.message||'Could not compress this PDF.'}</div>`;
+  }
+  btnReset(btn);
+}
+
+// ── ROTATE PDF ────────────────────────────────────────────────────────────────
+async function doRotatePDF(){
+  const files=getFiles('rotate-file');
+  if(!files.length){alert('Please upload a PDF.');return;}
+  const deg=parseInt(document.getElementById('rotate-deg').value,10);
+  const out=document.getElementById('rotate-out');
+  out.innerHTML=progressHTML('rotate-prog','Rotating pages...');
+  try{
+    const { PDFDocument, degrees } = PDFLib;
+    const bytes=await fileToArrayBuffer(files[0]);
+    const doc=await PDFDocument.load(bytes,{ignoreEncryption:true});
+    const pages=doc.getPages();
+    pages.forEach((p,i)=>{
+      const cur=p.getRotation().angle;
+      p.setRotation(degrees((cur+deg)%360));
+      setProgress('rotate-prog', (i+1)/pages.length*90);
+    });
+    const outBytes=await doc.save();
+    setProgress('rotate-prog',100);
+    window._rotatedPdfBytes=outBytes;
+    out.innerHTML=`<div class="result-box green" style="margin-top:16px;"><div class="result-label">✓ Rotated ${pages.length} Pages</div><button class="btn" style="margin-top:10px;" onclick="downloadBlob(new Blob([window._rotatedPdfBytes],{type:'application/pdf'}),'rotated.pdf');showToast('Downloaded!')">⬇ Download rotated.pdf</button></div>`;
+  }catch(err){
+    out.innerHTML=`<div class="result-box" style="margin-top:16px;color:#c0392b;">Error: ${err.message||'Could not rotate this PDF.'}</div>`;
+  }
+}
+
+// ── DELETE / EXTRACT PAGES (with thumbnails) ─────────────────────────────────
+async function renderThumbsCommon(files, thumbsId, mode){
+  const wrap=document.getElementById(thumbsId);
+  if(!files.length){ wrap.innerHTML=''; return; }
+  wrap.innerHTML=`<div class="progress-wrap"><div class="progress-bar" id="${thumbsId}-bar" style="width:10%;"></div></div>`;
+  try{
+    const buf=await fileToArrayBuffer(files[0]);
+    const pdf=await pdfjsLib.getDocument({data:buf.slice(0)}).promise;
+    const n=pdf.numPages;
+    const grid=document.createElement('div');
+    grid.className='page-thumb-grid';
+    wrap.innerHTML='';
+    wrap.appendChild(grid);
+    const selected = mode==='extract' ? new Set() : new Set(); // for delete: selected=to-delete; extract: selected=to-keep
+    wrap._selected = selected;
+    wrap._numPages = n;
+    for(let i=1;i<=n;i++){
+      const page=await pdf.getPage(i);
+      const viewport=page.getViewport({scale:0.3});
+      const canvas=document.createElement('canvas');
+      canvas.width=viewport.width; canvas.height=viewport.height;
+      await page.render({canvasContext:canvas.getContext('2d'), viewport}).promise;
+      const div=document.createElement('div');
+      div.className='page-thumb';
+      div.innerHTML=`<img src="${canvas.toDataURL()}"><div class="pt-num">${i}</div><div class="pt-check">✓</div>`;
+      div.onclick=()=>{
+        if(selected.has(i)){selected.delete(i); div.classList.remove('selected');}
+        else {selected.add(i); div.classList.add('selected');}
+        const btnId = mode==='extract' ? 'ext-btn' : 'del-btn';
+        const btn=document.getElementById(btnId);
+        if(btn) btn.style.display = selected.size ? '' : 'none';
+      };
+      grid.appendChild(div);
+    }
+  }catch(err){
+    wrap.innerHTML=`<div class="result-box" style="color:#c0392b;">Could not render preview: ${err.message||'invalid PDF'}</div>`;
+  }
+}
+function renderPageThumbsForDelete(files){ renderThumbsCommon(files, 'del-thumbs', 'delete'); document.getElementById('del-btn').style.display='none'; }
+function renderPageThumbsForExtract(files){ renderThumbsCommon(files, 'ext-thumbs', 'extract'); document.getElementById('ext-btn').style.display='none'; }
+
+async function doDeletePages(){
+  const files=getFiles('del-file');
+  const wrap=document.getElementById('del-thumbs');
+  const toDelete=wrap._selected;
+  if(!files.length || !toDelete || !toDelete.size){alert('Select at least one page to delete.');return;}
+  const out=document.getElementById('del-out');
+  out.innerHTML=progressHTML('del-prog','Removing pages...');
+  try{
+    const { PDFDocument } = PDFLib;
+    const bytes=await fileToArrayBuffer(files[0]);
+    const src=await PDFDocument.load(bytes,{ignoreEncryption:true});
+    const max=src.getPageCount();
+    const keep=[]; for(let i=0;i<max;i++) if(!toDelete.has(i+1)) keep.push(i);
+    setProgress('del-prog',40);
+    const doc=await PDFDocument.create();
+    const pages=await doc.copyPages(src, keep);
+    pages.forEach(p=>doc.addPage(p));
+    const outBytes=await doc.save();
+    setProgress('del-prog',100);
+    window._delPdfBytes=outBytes;
+    out.innerHTML=`<div class="result-box green" style="margin-top:16px;"><div class="result-label">✓ Removed ${toDelete.size} Page(s)</div><button class="btn" style="margin-top:10px;" onclick="downloadBlob(new Blob([window._delPdfBytes],{type:'application/pdf'}),'edited.pdf');showToast('Downloaded!')">⬇ Download edited.pdf</button></div>`;
+  }catch(err){
+    out.innerHTML=`<div class="result-box" style="margin-top:16px;color:#c0392b;">Error: ${err.message}</div>`;
+  }
+}
+
+async function doExtractPages(){
+  const files=getFiles('ext-file');
+  const wrap=document.getElementById('ext-thumbs');
+  const toKeep=wrap._selected;
+  if(!files.length || !toKeep || !toKeep.size){alert('Select at least one page to extract.');return;}
+  const out=document.getElementById('ext-out');
+  out.innerHTML=progressHTML('ext-prog','Extracting pages...');
+  try{
+    const { PDFDocument } = PDFLib;
+    const bytes=await fileToArrayBuffer(files[0]);
+    const src=await PDFDocument.load(bytes,{ignoreEncryption:true});
+    const indices=Array.from(toKeep).sort((a,b)=>a-b).map(p=>p-1);
+    setProgress('ext-prog',40);
+    const doc=await PDFDocument.create();
+    const pages=await doc.copyPages(src, indices);
+    pages.forEach(p=>doc.addPage(p));
+    const outBytes=await doc.save();
+    setProgress('ext-prog',100);
+    window._extPdfBytes=outBytes;
+    out.innerHTML=`<div class="result-box green" style="margin-top:16px;"><div class="result-label">✓ Extracted ${toKeep.size} Page(s)</div><button class="btn" style="margin-top:10px;" onclick="downloadBlob(new Blob([window._extPdfBytes],{type:'application/pdf'}),'extracted.pdf');showToast('Downloaded!')">⬇ Download extracted.pdf</button></div>`;
+  }catch(err){
+    out.innerHTML=`<div class="result-box" style="margin-top:16px;color:#c0392b;">Error: ${err.message}</div>`;
+  }
+}
+
+// ── SIGN PDF ──────────────────────────────────────────────────────────────────
+let sigCtx=null, sigDrawing=false, sigHasDrawing=false;
+function switchSigTab(which){
+  document.getElementById('sigtab-type').classList.toggle('active', which==='type');
+  document.getElementById('sigtab-draw').classList.toggle('active', which==='draw');
+  document.getElementById('sig-type-pane').style.display = which==='type'?'':'none';
+  document.getElementById('sig-draw-pane').style.display = which==='draw'?'':'none';
+}
+function initSigCanvas(){
+  const canvas=document.getElementById('sig-canvas');
+  if(!canvas || canvas._wired) return;
+  canvas._wired=true;
+  sigCtx=canvas.getContext('2d');
+  sigCtx.lineWidth=2.5; sigCtx.lineCap='round'; sigCtx.strokeStyle='#1a1d2e';
+  const pos=e=>{
+    const r=canvas.getBoundingClientRect();
+    const cx = (e.touches?e.touches[0].clientX:e.clientX) - r.left;
+    const cy = (e.touches?e.touches[0].clientY:e.clientY) - r.top;
+    return {x: cx*(canvas.width/r.width), y: cy*(canvas.height/r.height)};
+  };
+  const start=e=>{ e.preventDefault(); sigDrawing=true; sigHasDrawing=true; const p=pos(e); sigCtx.beginPath(); sigCtx.moveTo(p.x,p.y); };
+  const move=e=>{ if(!sigDrawing)return; e.preventDefault(); const p=pos(e); sigCtx.lineTo(p.x,p.y); sigCtx.stroke(); };
+  const end=()=>{ sigDrawing=false; };
+  canvas.addEventListener('mousedown',start); canvas.addEventListener('mousemove',move); window.addEventListener('mouseup',end);
+  canvas.addEventListener('touchstart',start); canvas.addEventListener('touchmove',move); canvas.addEventListener('touchend',end);
+}
+function clearSigCanvas(){ if(sigCtx){ sigCtx.clearRect(0,0,460,140); sigHasDrawing=false; } }
+
+async function doSignPDF(){
+  const files=getFiles('sign-file');
+  if(!files.length){alert('Please upload a PDF.');return;}
+  const isDrawTab = document.getElementById('sigtab-draw').classList.contains('active');
+  const pageNum = parseInt(document.getElementById('sig-page').value,10) || 1;
+  const out=document.getElementById('sign-out');
+  try{
+    const { PDFDocument, rgb, StandardFonts } = PDFLib;
+    const bytes=await fileToArrayBuffer(files[0]);
+    const doc=await PDFDocument.load(bytes,{ignoreEncryption:true});
+    const pages=doc.getPages();
+    if(pageNum<1||pageNum>pages.length){ out.innerHTML='<div class="result-box" style="color:#c0392b;">Page number out of range.</div>'; return; }
+    const page=pages[pageNum-1];
+    const {width,height}=page.getSize();
+
+    if(isDrawTab){
+      if(!sigHasDrawing){alert('Please draw your signature first.');return;}
+      const canvas=document.getElementById('sig-canvas');
+      const dataUrl=canvas.toDataURL('image/png');
+      const pngBytes=await fetch(dataUrl).then(r=>r.arrayBuffer());
+      const img=await doc.embedPng(pngBytes);
+      const w=160,h=160*(img.height/img.width);
+      page.drawImage(img,{x:width-w-40,y:40,width:w,height:h});
+    } else {
+      const text=document.getElementById('sig-text').value.trim();
+      if(!text){alert('Please type your signature.');return;}
+      const font=await doc.embedFont(StandardFonts.HelveticaOblique);
+      page.drawText(text,{x:width-260,y:50,size:26,font,color:rgb(0.1,0.1,0.18)});
+    }
+    const outBytes=await doc.save();
+    window._signedPdfBytes=outBytes;
+    out.innerHTML=`<div class="result-box green" style="margin-top:16px;"><div class="result-label">✓ Signature Added to Page ${pageNum}</div><button class="btn" style="margin-top:10px;" onclick="downloadBlob(new Blob([window._signedPdfBytes],{type:'application/pdf'}),'signed.pdf');showToast('Downloaded!')">⬇ Download signed.pdf</button></div>`;
+  }catch(err){
+    out.innerHTML=`<div class="result-box" style="margin-top:16px;color:#c0392b;">Error: ${err.message}</div>`;
+  }
+}
+
+// ── IMAGES → PDF ──────────────────────────────────────────────────────────────
+async function doImagesToPDF(){
+  const files=getFiles('i2p-files');
+  if(!files.length){alert('Please add at least 1 image.');return;}
+  const btn=document.getElementById('i2p-btn');
+  const out=document.getElementById('i2p-out');
+  btnLoading(btn,'Creating PDF...');
+  out.innerHTML=progressHTML('i2p-prog','Building PDF...');
+  try{
+    const { PDFDocument } = PDFLib;
+    const doc=await PDFDocument.create();
+    for(let i=0;i<files.length;i++){
+      const f=files[i];
+      const bytes=await fileToArrayBuffer(f);
+      let img;
+      if(f.type.includes('png')) img=await doc.embedPng(bytes);
+      else img=await doc.embedJpg(await convertToJpegBytes(f));
+      const page=doc.addPage([img.width,img.height]);
+      page.drawImage(img,{x:0,y:0,width:img.width,height:img.height});
+      setProgress('i2p-prog',(i+1)/files.length*90);
+    }
+    const outBytes=await doc.save();
+    setProgress('i2p-prog',100);
+    window._i2pBytes=outBytes;
+    out.innerHTML=`<div class="result-box green" style="margin-top:16px;"><div class="result-label">✓ PDF Created (${files.length} pages)</div><button class="btn" style="margin-top:10px;" onclick="downloadBlob(new Blob([window._i2pBytes],{type:'application/pdf'}),'images.pdf');showToast('Downloaded!')">⬇ Download images.pdf</button></div>`;
+  }catch(err){
+    out.innerHTML=`<div class="result-box" style="margin-top:16px;color:#c0392b;">Error: ${err.message}</div>`;
+  }
+  btnReset(btn);
+}
+// Helper: ensure non-JPEG raster images (e.g. webp) get converted to real JPEG bytes for pdf-lib
+async function convertToJpegBytes(file){
+  if(file.type==='image/jpeg' || file.type==='image/jpg') return await fileToArrayBuffer(file);
+  const img=await loadImage(file);
+  const canvas=document.createElement('canvas');
+  canvas.width=img.width; canvas.height=img.height;
+  canvas.getContext('2d').drawImage(img,0,0);
+  const blob=await new Promise(res=>canvas.toBlob(res,'image/jpeg',0.92));
+  return await blob.arrayBuffer();
+}
+function loadImage(file){
+  return new Promise((res,rej)=>{
+    const img=new Image();
+    img.onload=()=>res(img);
+    img.onerror=rej;
+    img.src=URL.createObjectURL(file);
+  });
+}
+
+// ── PDF → IMAGES (JPG/PNG) ────────────────────────────────────────────────────
+async function doPdfToImages(format){
+  const inputId = format==='jpeg' ? 'p2j-file' : 'p2n-file';
+  const outId = format==='jpeg' ? 'p2j-out' : 'p2n-out';
+  const btnId = format==='jpeg' ? 'p2j-btn' : 'p2n-btn';
+  const files=getFiles(inputId);
+  if(!files.length){alert('Please upload a PDF.');return;}
+  const btn=document.getElementById(btnId);
+  const out=document.getElementById(outId);
+  btnLoading(btn,'Converting...');
+  out.innerHTML=progressHTML(btnId+'-prog','Rendering pages...');
+  try{
+    const buf=await fileToArrayBuffer(files[0]);
+    const pdf=await pdfjsLib.getDocument({data:buf}).promise;
+    const n=pdf.numPages;
+    const images=[];
+    for(let i=1;i<=n;i++){
+      const page=await pdf.getPage(i);
+      const viewport=page.getViewport({scale:2});
+      const canvas=document.createElement('canvas');
+      canvas.width=viewport.width; canvas.height=viewport.height;
+      await page.render({canvasContext:canvas.getContext('2d'),viewport}).promise;
+      const mime = format==='jpeg' ? 'image/jpeg' : 'image/png';
+      const dataUrl=canvas.toDataURL(mime, 0.92);
+      images.push({page:i, dataUrl});
+      setProgress(btnId+'-prog', (i/n)*90);
+    }
+    setProgress(btnId+'-prog',100);
+    window['_pdfImgs_'+format]=images;
+    out.innerHTML=`<div class="result-box green" style="margin-top:16px;"><div class="result-label">✓ ${n} Page(s) Converted</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:10px;">
+      ${images.map((im,i)=>`<button class="btn btn-sec" onclick="downloadBlob(dataURLtoBlob('${im.dataUrl}'),'page-${im.page}.${format==='jpeg'?'jpg':'png'}')">⬇ Download Page ${im.page}</button>`).join('')}
+      ${images.length>1?`<button class="btn" style="margin-top:6px;" onclick="downloadAllAsZip(window['_pdfImgs_${format}'],'${format==='jpeg'?'jpg':'png'}')">⬇ Download All as ZIP</button>`:''}
+      </div></div>`;
+  }catch(err){
+    out.innerHTML=`<div class="result-box" style="margin-top:16px;color:#c0392b;">Error: ${err.message||'Could not render this PDF.'}</div>`;
+  }
+  btnReset(btn);
+}
+function dataURLtoBlob(dataUrl){
+  const [meta,b64]=dataUrl.split(',');
+  const mime=meta.match(/:(.*?);/)[1];
+  const bin=atob(b64);
+  const arr=new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++) arr[i]=bin.charCodeAt(i);
+  return new Blob([arr],{type:mime});
+}
+async function downloadAllAsZip(images, ext){
+  if(!window.JSZip){ await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'); }
+  const zip=new JSZip();
+  images.forEach(im=>{ zip.file(`page-${im.page}.${ext}`, im.dataUrl.split(',')[1], {base64:true}); });
+  const blob=await zip.generateAsync({type:'blob'});
+  downloadBlob(blob,'pages.zip');
+  showToast('ZIP downloaded!');
+}
+function loadScript(src){
+  return new Promise((res,rej)=>{
+    const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=rej; document.head.appendChild(s);
+  });
+}
+
+// ── PDF → TEXT ────────────────────────────────────────────────────────────────
+async function doPdfToText(){
+  const files=getFiles('p2t-file');
+  if(!files.length){alert('Please upload a PDF.');return;}
+  const btn=document.getElementById('p2t-btn');
+  const out=document.getElementById('p2t-out');
+  btnLoading(btn,'Extracting...');
+  out.innerHTML=progressHTML('p2t-prog','Reading PDF text...');
+  try{
+    const text=await extractTextFromPdf(files[0], pct=>setProgress('p2t-prog',pct));
+    window._pdfText=text;
+    out.innerHTML=`<div class="result-box" style="margin-top:16px;"><div class="result-label">Extracted Text</div><textarea readonly rows="8" style="margin-top:8px;">${escapeHtml(text).slice(0,5000)}${text.length>5000?'\\n\\n[...preview truncated, full text in download...]':''}</textarea><button class="btn" style="margin-top:8px;" onclick="downloadBlob(new Blob([window._pdfText],{type:'text/plain'}),'extracted.txt');showToast('Downloaded!')">⬇ Download .txt</button></div>`;
+  }catch(err){
+    out.innerHTML=`<div class="result-box" style="margin-top:16px;color:#c0392b;">Error: ${err.message||'Could not extract text. This PDF may be scanned — try Scan PDF to Text (OCR) instead.'}</div>`;
+  }
+  btnReset(btn);
+}
+async function extractTextFromPdf(file, onProgress){
+  const buf=await fileToArrayBuffer(file);
+  const pdf=await pdfjsLib.getDocument({data:buf}).promise;
+  let full='';
+  for(let i=1;i<=pdf.numPages;i++){
+    const page=await pdf.getPage(i);
+    const content=await page.getTextContent();
+    full += content.items.map(it=>it.str).join(' ') + '\n\n';
+    if(onProgress) onProgress((i/pdf.numPages)*95);
+  }
+  return full.trim();
+}
+function escapeHtml(s){ return s.replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+// ── OCR (image) ───────────────────────────────────────────────────────────────
+async function doOCR(){
+  const files=getFiles('ocr-file');
+  if(!files.length){alert('Please upload an image.');return;}
+  const btn=document.getElementById('ocr-btn');
+  const out=document.getElementById('ocr-out');
+  btnLoading(btn,'Reading...');
+  out.innerHTML=progressHTML('ocr-prog','Running OCR (this can take a moment)...');
+  try{
+    const { data: { text } } = await Tesseract.recognize(files[0], 'eng', {
+      logger: m=>{ if(m.status==='recognizing text') setProgress('ocr-prog', m.progress*100); }
+    });
+    window._ocrText=text;
+    out.innerHTML=`<div class="result-box" style="margin-top:16px;"><div class="result-label">Extracted Text</div><textarea readonly rows="8" style="margin-top:8px;">${escapeHtml(text)}</textarea><button class="btn" style="margin-top:8px;" onclick="downloadBlob(new Blob([window._ocrText],{type:'text/plain'}),'ocr-result.txt');showToast('Downloaded!')">⬇ Download .txt</button></div>`;
+  }catch(err){
+    out.innerHTML=`<div class="result-box" style="margin-top:16px;color:#c0392b;">Error: ${err.message||'OCR failed. Try a clearer image.'}</div>`;
+  }
+  btnReset(btn);
+}
+
+// ── SCAN PDF → OCR TEXT ───────────────────────────────────────────────────────
+async function doScanOCR(){
+  const files=getFiles('socr-file');
+  if(!files.length){alert('Please upload a PDF.');return;}
+  const btn=document.getElementById('socr-btn');
+  const out=document.getElementById('socr-out');
+  btnLoading(btn,'Running OCR...');
+  out.innerHTML=progressHTML('socr-prog','Converting pages & running OCR...');
+  try{
+    const buf=await fileToArrayBuffer(files[0]);
+    const pdf=await pdfjsLib.getDocument({data:buf}).promise;
+    let fullText='';
+    const n=pdf.numPages;
+    for(let i=1;i<=n;i++){
+      const page=await pdf.getPage(i);
+      const viewport=page.getViewport({scale:2});
+      const canvas=document.createElement('canvas');
+      canvas.width=viewport.width; canvas.height=viewport.height;
+      await page.render({canvasContext:canvas.getContext('2d'),viewport}).promise;
+      const dataUrl=canvas.toDataURL('image/png');
+      const { data:{text} } = await Tesseract.recognize(dataUrl,'eng',{
+        logger: m=>{ if(m.status==='recognizing text') setProgress('socr-prog', ((i-1)+m.progress)/n*95); }
+      });
+      fullText += `--- Page ${i} ---\n${text}\n\n`;
+    }
+    window._scanOcrText=fullText.trim();
+    setProgress('socr-prog',100);
+    out.innerHTML=`<div class="result-box" style="margin-top:16px;"><div class="result-label">Extracted Text (${n} page${n>1?'s':''})</div><textarea readonly rows="8" style="margin-top:8px;">${escapeHtml(fullText.slice(0,5000))}</textarea><button class="btn" style="margin-top:8px;" onclick="downloadBlob(new Blob([window._scanOcrText],{type:'text/plain'}),'scanned-text.txt');showToast('Downloaded!')">⬇ Download .txt</button></div>`;
+  }catch(err){
+    out.innerHTML=`<div class="result-box" style="margin-top:16px;color:#c0392b;">Error: ${err.message||'OCR failed on this PDF.'}</div>`;
+  }
+  btnReset(btn);
+}
+
+// ── PDF → WORD (text-based .doc) ──────────────────────────────────────────────
+async function doPdfToWord(){
+  const files=getFiles('p2w-file');
+  if(!files.length){alert('Please upload a PDF.');return;}
+  const btn=document.getElementById('p2w-btn');
+  const out=document.getElementById('p2w-out');
+  btnLoading(btn,'Converting...');
+  out.innerHTML=progressHTML('p2w-prog','Extracting content...');
+  try{
+    const text=await extractTextFromPdf(files[0], pct=>setProgress('p2w-prog',pct));
+    const html = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+      <head><meta charset="utf-8"><title>Document</title></head>
+      <body>${text.split('\n\n').map(p=>`<p>${escapeHtml(p).replace(/\n/g,'<br>')}</p>`).join('')}</body></html>`;
+    const blob=new Blob(['\ufeff', html], {type:'application/msword'});
+    window._wordBlob=blob;
+    setProgress('p2w-prog',100);
+    out.innerHTML=`<div class="result-box green" style="margin-top:16px;"><div class="result-label">✓ Converted to Word</div><button class="btn" style="margin-top:10px;" onclick="downloadBlob(window._wordBlob,'converted.doc');showToast('Downloaded!')">⬇ Download converted.doc</button></div>`;
+  }catch(err){
+    out.innerHTML=`<div class="result-box" style="margin-top:16px;color:#c0392b;">Error: ${err.message||'Could not extract this PDF — it may be scanned. Try Scan PDF to Text first.'}</div>`;
+  }
+  btnReset(btn);
+}
+
+// ── WORD → PDF (text-based) ───────────────────────────────────────────────────
+async function doWordToPdf(){
+  const files=getFiles('w2p-file');
+  if(!files.length){alert('Please upload a .docx file.');return;}
+  const btn=document.getElementById('w2p-btn');
+  const out=document.getElementById('w2p-out');
+  btnLoading(btn,'Converting...');
+  out.innerHTML=progressHTML('w2p-prog','Reading document...');
+  try{
+    if(!window.mammoth){ await loadScript('https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js'); }
+    const buf=await fileToArrayBuffer(files[0]);
+    setProgress('w2p-prog',30);
+    const result=await mammoth.extractRawText({arrayBuffer:buf});
+    const text=result.value;
+    setProgress('w2p-prog',55);
+    const { PDFDocument, StandardFonts, rgb } = PDFLib;
+    const doc=await PDFDocument.create();
+    const font=await doc.embedFont(StandardFonts.Helvetica);
+    const fontSize=11, margin=50, lineHeight=15;
+    let page=doc.addPage([612,792]);
+    let y=792-margin;
+    const maxWidth=612-margin*2;
+    const words=text.split(/\s+/);
+    let line='';
+    function pushLine(l){
+      if(y<margin){ page=doc.addPage([612,792]); y=792-margin; }
+      page.drawText(l,{x:margin,y,size:fontSize,font,color:rgb(0.1,0.1,0.18)});
+      y-=lineHeight;
+    }
+    for(const w of words){
+      const test=line?line+' '+w:w;
+      if(font.widthOfTextAtSize(test,fontSize)>maxWidth){ pushLine(line); line=w; } else { line=test; }
+    }
+    if(line) pushLine(line);
+    setProgress('w2p-prog',90);
+    const outBytes=await doc.save();
+    setProgress('w2p-prog',100);
+    window._w2pBytes=outBytes;
+    out.innerHTML=`<div class="result-box green" style="margin-top:16px;"><div class="result-label">✓ Converted to PDF</div><button class="btn" style="margin-top:10px;" onclick="downloadBlob(new Blob([window._w2pBytes],{type:'application/pdf'}),'converted.pdf');showToast('Downloaded!')">⬇ Download converted.pdf</button></div>`;
+  }catch(err){
+    out.innerHTML=`<div class="result-box" style="margin-top:16px;color:#c0392b;">Error: ${err.message||'Could not convert this document.'}</div>`;
+  }
+  btnReset(btn);
+}
+
+// ── PDF → EXCEL (CSV of text lines) ───────────────────────────────────────────
+async function doPdfToExcel(){
+  const files=getFiles('p2e-file');
+  if(!files.length){alert('Please upload a PDF.');return;}
+  const btn=document.getElementById('p2e-btn');
+  const out=document.getElementById('p2e-out');
+  btnLoading(btn,'Converting...');
+  out.innerHTML=progressHTML('p2e-prog','Extracting rows...');
+  try{
+    const buf=await fileToArrayBuffer(files[0]);
+    const pdf=await pdfjsLib.getDocument({data:buf}).promise;
+    let rows=[];
+    for(let i=1;i<=pdf.numPages;i++){
+      const page=await pdf.getPage(i);
+      const content=await page.getTextContent();
+      // group items by approx Y position to form rows
+      const lineMap={};
+      content.items.forEach(it=>{
+        const y=Math.round(it.transform[5]);
+        if(!lineMap[y]) lineMap[y]=[];
+        lineMap[y].push(it.str);
+      });
+      Object.keys(lineMap).sort((a,b)=>b-a).forEach(y=>{
+        rows.push(lineMap[y].join(' , '));
+      });
+      setProgress('p2e-prog',(i/pdf.numPages)*90);
+    }
+    const csv = rows.map(r=>r.split(',').map(c=>`"${c.trim().replace(/"/g,'""')}"`).join(',')).join('\n');
+    window._csvBlob=new Blob([csv],{type:'text/csv'});
+    setProgress('p2e-prog',100);
+    out.innerHTML=`<div class="result-box green" style="margin-top:16px;"><div class="result-label">✓ Converted to CSV</div><div style="margin:8px 0;color:var(--muted);font-size:13px;">${rows.length} rows extracted — open in Excel/Sheets.</div><button class="btn" onclick="downloadBlob(window._csvBlob,'converted.csv');showToast('Downloaded!')">⬇ Download converted.csv</button></div>`;
+  }catch(err){
+    out.innerHTML=`<div class="result-box" style="margin-top:16px;color:#c0392b;">Error: ${err.message||'Could not extract table data from this PDF.'}</div>`;
+  }
+  btnReset(btn);
+}
 </script>
 
 </body>
